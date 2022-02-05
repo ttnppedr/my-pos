@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', \App\Http\Livewire\Home::class)->name('home');
+Route::get('/products', \App\Http\Livewire\Products::class)->name('products');
 
 Route::get('/cashier', function () {
     return view('cashier');
