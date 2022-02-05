@@ -13,8 +13,6 @@ class Products extends Component
 
     public $search;
 
-    protected $updatesQueryString = ['search'];
-
     public function mount()
     {
         $this->search = request()->query('search', $this->search);

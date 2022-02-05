@@ -1,6 +1,8 @@
 <div>
     <div class="w-full flex justify-center">
-        <input wire:model="search" type="text" class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Search products by name...">
+        <input wire:model="search" type="text"
+               class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               placeholder="Search products by name...">
     </div>
 
     <div class="w-full flex justify-center">
@@ -17,7 +19,8 @@
                             {{ $product->description }}
                         </p>
                         <div class="flex justify-end mt-5 absolute w-full bottom-0 left-0 pb-5">
-                            <button wire:click="addToCart({{ $product->id }})" class="block uppercase font-bold text-green-600 hover:text-green-500 mr-4">
+                            <button wire:click="addToCart({{ $product->id }})"
+                                    class="block uppercase font-bold text-green-600 hover:text-green-500 mr-4">
                                 Add to cart
                             </button>
                         </div>
