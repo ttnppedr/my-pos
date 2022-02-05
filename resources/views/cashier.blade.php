@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <title>Laravel</title>
 </head>
 <body>
-<div class="flex h-screen">
+<div class="flex h-screen" x-data="{openNewItemModal: false}">
     <div class="w-1/3">
         <div class="text-center flex h-[60px] border-b-2 border-black">
             <div class="py-2 pl-2">
@@ -141,7 +142,8 @@
                 </div>
             </li>
             <li class="flex justify-center bg-gray-200 rounded-3xl mb-3 border border-black">
-                <button type="button" class="text-blue-700 rounded-3xl border flex-1 flex justify-center">
+                <button type="button" class="text-blue-700 rounded-3xl border flex-1 flex justify-center"
+                        @click="openNewItemModal = true">
                     <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -221,6 +223,36 @@
                         class="w-1/2 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-red-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     結帳
                 </button>
+            </div>
+        </div>
+    </div>
+    <div x-show="openNewItemModal" class="fixed inset-0 overflow-y-auto">
+        <div x-show="openNewItemModal" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
+        <div
+            x-show="open" x-transition
+            x-on:click="openNewItemModal = false"
+            class="relative min-h-screen flex items-center justify-center p-4"
+        >
+            <div
+                x-on:click.stop
+                x-trap.noscroll.inert="open"
+                class="relative max-w-3xl w-full bg-white border border-black p-8 overflow-y-auto"
+            >
+                <!-- Title -->
+                <h2 class="text-3xl font-medium" :id="$id('modal-title')">Confirm</h2>
+                <!-- Content -->
+                <p class="mt-2 text-gray-600">Are you sure you want to learn how to create an awesome modal?</p>
+                <!-- Buttons -->
+                <div class="mt-8 flex space-x-2">
+                    <button type="button" x-on:click="openNewItemModal = false"
+                            class="bg-white border border-black px-4 py-2 focus:outline-none focus:ring-4 focus:ring-aqua-400">
+                        Confirm
+                    </button>
+                    <button type="button" x-on:click="openNewItemModal = false"
+                            class="bg-white border border-black px-4 py-2 focus:outline-none focus:ring-4 focus:ring-aqua-400">
+                        Cancel
+                    </button>
+                </div>
             </div>
         </div>
     </div>
