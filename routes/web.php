@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Livewire\Home::class)->name('home');
 Route::get('/products', \App\Http\Livewire\Products::class)->name('products');
+Route::get('/cart', \App\Http\Livewire\Cart::class)->name('cart');
+Route::get('/test', function () {
+    return CartH::get();
+});
 
 Route::get('/cashier', function () {
     return view('cashier');

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Helpers\Cart;
+use App\Facades\CartHelperFacade;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -31,6 +31,6 @@ class Products extends Component
 
     public function addToCart(int $productId): void
     {
-        Cart::add(Product::where('id', $productId)->first());
+        CartHelperFacade::add(Product::where('id', $productId)->first());
     }
 }
