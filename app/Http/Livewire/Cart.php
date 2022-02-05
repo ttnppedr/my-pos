@@ -23,11 +23,13 @@ class Cart extends Component
     {
         CartHelperFacade::remove($productId);
         $this->cart = CartHelperFacade::get();
+        $this->emit('productRemoved');
     }
 
     public function checkout()
     {
         CartHelperFacade::clear();
+        $this->emit('clearCart');
         $this->cart = CartHelperFacade::get();
     }
 }

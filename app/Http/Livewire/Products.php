@@ -32,5 +32,6 @@ class Products extends Component
     public function addToCart(int $productId): void
     {
         CartHelperFacade::add(Product::where('id', $productId)->first());
+        $this->emit('productAdded');
     }
 }
