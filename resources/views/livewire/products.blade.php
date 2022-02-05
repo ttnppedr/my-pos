@@ -12,7 +12,7 @@
                         <h5 class="font-black uppercase text-2xl mb-4">
                             {{ $product->name }}
                         </h5>
-                        <h6 class="font-bold text-gray-700 text-xl mb-3">U$S {{ $product->price }}</h6>
+                        <h6 class="font-bold text-gray-700 text-xl mb-3">US ${{ $product->price }}</h6>
                         <p class="text-gray-900 font-normal mb-12">
                             {{ $product->description }}
                         </p>
