@@ -177,6 +177,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
 
+        App\Providers\CartHelperServiceProvider::class,
     ],
 
     /*
@@ -232,6 +233,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Cart' => App\Facades\CartHelperFacade::class,
     ],
 
 ];
