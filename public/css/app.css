@@ -1406,6 +1406,9 @@ select {
 .rounded-3xl {
   border-radius: 1.5rem;
 }
+.rounded-2xl {
+  border-radius: 1rem;
+}
 .rounded-l-md {
   border-top-left-radius: 0.375rem;
   border-bottom-left-radius: 0.375rem;
