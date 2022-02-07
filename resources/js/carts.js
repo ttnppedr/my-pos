@@ -23,6 +23,11 @@ export default () =>  ( {
         },
 
         addCartFromList(name, price) {
+            let items = this.carts.filter(cart => cart.name === name && cart.price === price);
+            if (items.length) {
+                return items[0].amount++;
+            }
+
             this.carts.push({
                 id: Date.now(),
                 name: name,

@@ -5550,6 +5550,14 @@ __webpack_require__.r(__webpack_exports__);
       this.newCartPrice = '';
     },
     addCartFromList: function addCartFromList(name, price) {
+      var items = this.carts.filter(function (cart) {
+        return cart.name === name && cart.price === price;
+      });
+
+      if (items.length) {
+        return items[0].amount++;
+      }
+
       this.carts.push({
         id: Date.now(),
         name: name,
