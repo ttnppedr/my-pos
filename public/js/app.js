@@ -5475,10 +5475,12 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _carts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./carts */ "./resources/js/carts.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
+
+alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].data('carts', _carts__WEBPACK_IMPORTED_MODULE_1__["default"]);
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
 /***/ }),
@@ -5511,6 +5513,55 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/carts.js":
+/*!*******************************!*\
+  !*** ./resources/js/carts.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
+  return {
+    openNewItemModal: false,
+    newCartName: '',
+    newCartPrice: '',
+    carts: [],
+    addCart: function addCart() {
+      if (!this.newCartName || !this.newCartPrice) {
+        this.openNewItemModal = false;
+        return;
+      }
+
+      this.carts.push({
+        id: Date.now(),
+        name: this.newCartName,
+        price: this.newCartPrice,
+        amount: 1
+      });
+      this.openNewItemModal = false;
+      this.newCartName = '';
+      this.newCartPrice = '';
+    },
+    cartPlus: function cartPlus(cart) {
+      cart.amount++;
+    },
+    cartMinus: function cartMinus(cart) {
+      cart.amount--;
+
+      if (cart.amount === 0) {
+        var position = this.carts.indexOf(cart);
+        this.carts.splice(position, 1);
+      }
+    }
+  };
+});
 
 /***/ }),
 

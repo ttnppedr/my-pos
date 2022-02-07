@@ -1,7 +1,8 @@
 require('./bootstrap');
 
 import Alpine from 'alpinejs';
+import carts from './carts';
 
-window.Alpine = Alpine;
+Alpine.data('carts', carts);
 
 Alpine.start();

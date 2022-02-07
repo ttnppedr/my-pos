@@ -8,7 +8,7 @@
     <title>Laravel</title>
 </head>
 <body>
-<div class="flex h-screen" x-data="{openNewItemModal: false}">
+<div class="flex h-screen" x-data="carts()">
     <div class="w-1/3">
         <div class="text-center flex h-[60px] border-b-2 border-black">
             <div class="py-2 pl-2">
@@ -79,68 +79,46 @@
     </div>
     <div class="flex-1">
         <ul class="flex-1 flex flex-col p-2 overflow-y-auto h-screen">
-            <li class="flex flex-col justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-black">
-                <div class="flex justify-between mb-2">
-                    <span class="text-5xl font-semibold text-blue-500">Mojito</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
-                </div>
-                <div>
-                    <div class="flex items-center justify-center">
-                        <button type="button"
-                                class="border border-red-500 shadow-sm text-white bg-red-500">
-                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M20 12H4"></path>
-                            </svg>
-                        </button>
-                        <input type="text" name="name" id="name" value="1"
-                               class="mx-3 shadow-sm block w-1/4 border-4 border-gray-500 px-4 rounded-lg text-center text-gray-500 text-3xl"
-                        >
-                        <button type="button"
-                                class="border border-green-500 shadow-sm text-white bg-green-500">
-                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                            </svg>
-                        </button>
+
+            <template x-for="cart in carts" :key="cart.id">
+                <li class="flex flex-col justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-black">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-5xl font-semibold text-blue-500" x-text="cart.name"></span>
+                        <span class="text-5xl font-semibold text-blue-500" x-text="'$'+cart.price"></span>
                     </div>
-                </div>
-            </li>
-            <li class="flex flex-col justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-black">
-                <div class="flex justify-between mb-2">
-                    <span class="text-5xl font-semibold text-blue-500">Manhattan</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
-                </div>
-                <div>
-                    <div class="flex items-center justify-center">
-                        <button type="button"
-                                class="border border-red-500 shadow-sm text-white bg-red-500">
-                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M20 12H4"></path>
-                            </svg>
-                        </button>
-                        <input type="text" name="name" id="name" value="2"
-                               class="mx-3 shadow-sm block w-1/4 border-4 border-gray-500 px-4 rounded-lg text-center text-gray-500 text-3xl"
-                        >
-                        <button type="button"
-                                class="border border-green-500 shadow-sm text-white bg-green-500">
-                            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                            </svg>
-                        </button>
+                    <div>
+                        <div class="flex items-center justify-center">
+                            <button type="button"
+                                    @click="cartMinus(cart)"
+                                    class="border border-red-500 shadow-sm text-white bg-red-500">
+                                <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M20 12H4"></path>
+                                </svg>
+                            </button>
+                            <input type="text" name="amount" id="amount" x-model="cart.amount"
+                                   class="mx-3 shadow-sm block w-1/4 border-4 border-gray-500 px-4 rounded-lg text-center text-gray-500 text-3xl"
+                            >
+                            <button type="button"
+                                    @click="cartPlus(cart)"
+                                    class="border border-green-500 shadow-sm text-white bg-green-500">
+                                <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            </template>
+
             <li class="mb-3">
                 <div class="h-2 bg-gray-500 rounded">
                 </div>
             </li>
+
             <li class="flex justify-center bg-gray-200 rounded-3xl mb-3 border border-black">
                 <button type="button" class="text-blue-700 rounded-3xl border flex-1 flex justify-center"
                         @click="openNewItemModal = true">
@@ -230,22 +208,22 @@
     <div x-show="openNewItemModal" class="fixed inset-0 overflow-y-auto">
         <div x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
         <div
-            x-show="open" x-transition
+            x-transition
             class="relative min-h-screen flex items-center justify-center p-4"
         >
             <div
                 x-on:click.stop
-                x-trap.noscroll.inert="open"
+                x-trap.noscroll.inert="openNewItemModal"
                 class="relative max-w-3xl w-full bg-white border border-black p-8 overflow-y-auto rounded-2xl"
             >
                 <!-- Content -->
                 <div class="flex flex-col items-center">
-                    <input type="text" class="w-3/4 rounded text-3xl" placeholder="名稱">
-                    <input type="text" class="mt-2 w-3/4 rounded text-3xl" placeholder="價格">
+                    <input type="text" class="w-3/4 rounded text-3xl" placeholder="名稱" x-model="newCartName">
+                    <input type="text" class="mt-2 w-3/4 rounded text-3xl" placeholder="價格" x-model="newCartPrice">
                 </div>
                 <!-- Buttons -->
                 <div class="mt-4 flex space-x-2 justify-center">
-                    <button type="button" x-on:click="openNewItemModal = false"
+                    <button type="button" x-on:click="addCart"
                             class="p-2 text-5xl font-bold rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
                         新增
                     </button>
