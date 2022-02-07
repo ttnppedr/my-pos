@@ -30,49 +30,94 @@
         </div>
         <div>
             <ul class="flex-1 flex flex-col p-2 overflow-y-auto h-[calc(100vh_-_60px)] overflow-x-hidden">
-                <li class="flex justify-between items-center p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-[1vw] font-semibold text-blue-500 whitespace-nowrap">一二三四五六七八九十一二三四五六七八九十</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('一二三四五六七八九十一二三四五六七八九十', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span
+                            class="text-[1vw] font-semibold text-blue-500 whitespace-nowrap">一二三四五六七八九十一二三四五六七八九十</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
-                <li class="flex justify-between items-center p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-[12px] font-semibold text-blue-500 whitespace-nowrap">Mojitoaoenuthaounsthatoenhuaontuehaontueh</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('Mojitoaoenuthaounsthatoenhuaontuehaontueh', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span class="text-[12px] font-semibold text-blue-500 whitespace-nowrap">Mojitoaoenuthaounsthatoenhuaontuehaontueh</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
-                <li class="flex justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-5xl font-semibold text-blue-500">Aperol Spritz</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('Aperol Spritz', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span class="text-5xl font-semibold text-blue-500">Aperol Spritz</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
-                <li class="flex justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-5xl font-semibold text-blue-500">Manhattan</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('Manhattan', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span class="text-5xl font-semibold text-blue-500">Manhattan</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
-                <li class="flex justify-between items-center p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-[48px] font-semibold text-blue-500 whitespace-nowrap">Whiskey Sour</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('Whiskey Sour', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span class="text-4xl font-semibold text-blue-500 whitespace-nowrap">Whiskey Sour</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
-                <li class="flex justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-4xl font-semibold text-blue-500 whitespace-nowrap">Espresso Martini</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('Espresso Martini', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span class="text-4xl font-semibold text-blue-500 whitespace-nowrap">Espresso Martini</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
-                <li class="flex justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-5xl font-semibold text-blue-500">Margarita</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('Margarita', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span class="text-5xl font-semibold text-blue-500">Margarita</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
-                <li class="flex justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-5xl font-semibold text-blue-500">Dry Martini</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('Dry Martini', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span class="text-5xl font-semibold text-blue-500">Dry Martini</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
-                <li class="flex justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-5xl font-semibold text-blue-500">Daiquiri</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('Daiquiri', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span class="text-5xl font-semibold text-blue-500">Daiquiri</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
-                <li class="flex justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-5xl font-semibold text-blue-500">Negroni</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('Negroni', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span class="text-5xl font-semibold text-blue-500">Negroni</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
-                <li class="flex justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                    <span class="text-5xl font-semibold text-blue-500 whitespace-nowrap">Old Fashioned</span>
-                    <span class="text-5xl font-semibold text-blue-500">$300</span>
+                <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                    <button @click="addCartFromList('Old Fashioned', 300)"
+                            class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                    >
+                        <span class="text-4xl font-semibold text-blue-500 whitespace-nowrap">Old Fashioned</span>
+                        <span class="text-5xl font-semibold text-blue-500">$300</span>
+                    </button>
                 </li>
             </ul>
         </div>

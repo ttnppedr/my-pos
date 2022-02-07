@@ -22,6 +22,15 @@ export default () =>  ( {
             this.newCartPrice = '';
         },
 
+        addCartFromList(name, price) {
+            this.carts.push({
+                id: Date.now(),
+                name: name,
+                price: price,
+                amount: 1
+            });
+        },
+
         cartPlus(cart) {
             cart.amount++;
         },

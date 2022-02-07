@@ -5549,6 +5549,14 @@ __webpack_require__.r(__webpack_exports__);
       this.newCartName = '';
       this.newCartPrice = '';
     },
+    addCartFromList: function addCartFromList(name, price) {
+      this.carts.push({
+        id: Date.now(),
+        name: name,
+        price: price,
+        amount: 1
+      });
+    },
     cartPlus: function cartPlus(cart) {
       cart.amount++;
     },
