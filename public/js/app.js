@@ -5549,7 +5549,7 @@ __webpack_require__.r(__webpack_exports__);
       this.newCartName = '';
       this.newCartPrice = '';
     },
-    addCartFromList: function addCartFromList(name, price) {
+    addCartFromList: function addCartFromList(name, price, id) {
       var items = this.carts.filter(function (cart) {
         return cart.name === name && cart.price === price;
       });
@@ -5559,7 +5559,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.carts.push({
-        id: Date.now(),
+        id: id,
         name: name,
         price: price,
         amount: 1

@@ -22,14 +22,14 @@ export default () =>  ( {
             this.newCartPrice = '';
         },
 
-        addCartFromList(name, price) {
+        addCartFromList(name, price, id) {
             let items = this.carts.filter(cart => cart.name === name && cart.price === price);
             if (items.length) {
                 return items[0].amount++;
             }
 
             this.carts.push({
-                id: Date.now(),
+                id: id,
                 name: name,
                 price: price,
                 amount: 1

@@ -35,3 +35,4 @@
         {{ $products->links('layouts.pagination') }}
     </div>
 </div>
+
