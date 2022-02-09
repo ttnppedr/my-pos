@@ -71,11 +71,6 @@
                 </li>
             </template>
 
-            <li class="mb-3" x-show="carts.length">
-                <div class="h-2 bg-gray-500 rounded">
-                </div>
-            </li>
-
             <li class="flex justify-center bg-gray-200 rounded-3xl mb-3 border border-black">
                 <button type="button" class="text-blue-700 rounded-3xl border flex-1 flex justify-center"
                         @click="openNewItemModal = true">
