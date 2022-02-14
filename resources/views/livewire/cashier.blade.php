@@ -1,4 +1,4 @@
-<div class="flex h-screen" x-data="carts()">
+<div class="flex h-screen" x-data="carts()" wire:key="cashier">
     <div class="w-1/3">
         <div class="text-center flex h-[60px] border-b-2 border-black">
             <div class="py-2 pl-2">
@@ -20,33 +20,54 @@
         </div>
         <div>
             <ul class="flex-1 flex flex-col p-2 overflow-y-auto h-[calc(100vh_-_60px)] overflow-x-hidden">
-                @foreach($products as $product)
-                    <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                        <button @click="addCartFromList('{{$product->name}}', {{$product->price}}, '{{$product->id}}')"
+                <div>
+
+{{--                @foreach($products as $product)--}}
+                    <li wire:key="{{$products[0]->id}}"
+                        class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+{{--                        <button @click="addCartFromList('{{$product->name}}', {{$product->price}}, '{{$product->id}}')"--}}
+                        <button wire:click="addToCart({{$products[0]->id}})"
                                 class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
                         >
                         <span
-                            class="text-5xl font-semibold text-blue-500 whitespace-nowrap">{{$product->name}}</span>
-                            <span class="text-5xl font-semibold text-blue-500">${{$product->price}}</span>
+                            class="text-5xl font-semibold text-blue-500 whitespace-nowrap">{{$products[0]->name}}</span>
+                            <span class="text-5xl font-semibold text-blue-500">${{$products[0]->price}}</span>
                         </button>
                     </li>
-                @endforeach
+
+                    <li wire:key="{{$products[1]->id}}"
+                        class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                        {{--                        <button @click="addCartFromList('{{$product->name}}', {{$product->price}}, '{{$product->id}}')"--}}
+                        <button wire:click="addToCart({{$products[1]->id}})"
+                                class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                        >
+                        <span
+                            class="text-5xl font-semibold text-blue-500 whitespace-nowrap">{{$products[1]->name}}</span>
+                            <span class="text-5xl font-semibold text-blue-500">${{$products[1]->price}}</span>
+                        </button>
+                    </li>
+{{--                @endforeach--}}
+                </div>
             </ul>
         </div>
     </div>
     <div class="flex-1">
         <ul class="flex-1 flex flex-col p-2 overflow-y-auto h-screen">
 
-            <template x-for="cart in carts" :key="cart.id">
-                <li class="flex flex-col justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-black">
+{{--            <template x-for="cart in carts" :key="cart.id">--}}
+            <div>
+
+            @foreach($this->cart as $index => $productInCart)
+                <li wire:key="cart-field-{{$index}}"
+                    class="flex flex-col justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-black">
                     <div class="flex justify-between mb-2">
-                        <span class="text-5xl font-semibold text-blue-500" x-text="cart.name"></span>
-                        <span class="text-5xl font-semibold text-blue-500" x-text="'$'+cart.price"></span>
+                        <span class="text-5xl font-semibold text-blue-500">{{$productInCart['name']}}</span>
+                        <span class="text-5xl font-semibold text-blue-500">${{$productInCart['price']}}</span>
                     </div>
                     <div>
                         <div class="flex items-center justify-center">
                             <button type="button"
-                                    @click="cartMinus(cart)"
+{{--                                    @click="cartMinus(cart)"--}}
                                     class="border border-red-500 shadow-sm text-white bg-red-500">
                                 <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -54,11 +75,12 @@
                                           d="M20 12H4"></path>
                                 </svg>
                             </button>
-                            <input type="text" name="amount" id="amount" x-model="cart.amount"
+                            <input type="text" name="quantity"
+                                   wire:model="cart.{{$index}}.quantity"
                                    class="mx-3 shadow-sm block w-1/4 border-4 border-gray-500 px-4 rounded-lg text-center text-gray-500 text-3xl"
                             >
                             <button type="button"
-                                    @click="cartPlus(cart)"
+                                    wire:click="cartPlus({{$index}})"
                                     class="border border-green-500 shadow-sm text-white bg-green-500">
                                 <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +91,9 @@
                         </div>
                     </div>
                 </li>
-            </template>
+            @endforeach
+            </div>
+{{--            </template>--}}
 
             <li class="flex justify-center bg-gray-200 rounded-3xl mb-3 border border-black">
                 <button type="button" class="text-blue-700 rounded-3xl border flex-1 flex justify-center"
