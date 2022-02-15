@@ -12,6 +12,9 @@
             <a href="/products" class="block mt-4 lg:inline-block lg:mt-0 mr-4">
                 Products
             </a>
+            <a href="/cashier" class="block mt-4 lg:inline-block lg:mt-0 mr-4">
+                Cashier
+            </a>
             <a href="/cart" class="block mt-4 lg:inline-block lg:mt-0 mr-4">
                 Cart
             </a>

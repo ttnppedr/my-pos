@@ -19,7 +19,7 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body>
-{{--        @livewire('header')--}}
+        @livewire('header')
 
         <div class="mx-auto">
             {{ $slot }}

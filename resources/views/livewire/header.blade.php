@@ -16,6 +16,9 @@
                 <a href="/cart" data-turbolinks-action="replace" class="block mt-4 lg:inline-block lg:mt-0 mr-4">
                     Cart({{ $cartTotal }})
                 </a>
+                <a href="/cashier" data-turbolinks-action="replace" class="block mt-4 lg:inline-block lg:mt-0 mr-4">
+                    Cashier
+                </a>
             </div>
         </div>
     </nav>
