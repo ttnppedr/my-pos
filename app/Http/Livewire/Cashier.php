@@ -18,6 +18,18 @@ class Cashier extends Component
 
     public function addToCartFromProductList($productId)
     {
+        $cart = collect($this->cart);
+
+        if ($cart->firstWhere('id', $productId)) {
+            $this->cart = $cart->map(function ($product) use ($productId) {
+                if ($product['id'] === $productId) {
+                    $product['quantity']++;
+                }
+                return $product;
+            })->toArray();
+            return;
+        }
+
         $this->cart[] = Product::select(['id', 'name', 'price'])->find($productId)->toArray() + ['quantity' => 1];
     }
 
