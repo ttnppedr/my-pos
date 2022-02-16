@@ -79,4 +79,9 @@ class Cashier extends Component
             return $sum;
         }, 0);
     }
+
+    public function clear()
+    {
+        $this->cart = [];
+    }
 }
