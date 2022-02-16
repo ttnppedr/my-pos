@@ -4,10 +4,6 @@
             <div class="py-2 pl-2">
                 <span class="relative z-0 inline-flex shadow-sm rounded-md">
                     <button type="button"
-                            class="relative inline-flex items-center px-4 py-2 ml-1 rounded-md border border-gray-500 bg-white text-lg font-medium text-gray-700">
-                        歷史商品
-                        </button>
-                    <button type="button"
                             class="-ml-px relative inline-flex items-center px-4 py-2 ml-1 rounded-md border border-gray-500 bg-white text-lg font-medium text-gray-700">
                         商品
                     </button>
