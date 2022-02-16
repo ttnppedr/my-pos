@@ -13,7 +13,11 @@ class Cashier extends Component
 
     public function render()
     {
-        return view('livewire.cashier', ['products' => Product::all(['id', 'name', 'price']), 'cart' => $this->cart]);
+        return view('livewire.cashier', [
+            'products' => Product::all(['id', 'name', 'price']),
+            'cart' => $this->cart,
+            'amountReceivable' => $this->calculateAmountReceivable()
+        ]);
     }
 
     public function addToCartFromProductList($productId)
@@ -54,16 +58,11 @@ class Cashier extends Component
             return array_merge($product, ['product_id' => $product['id']]);
         }, $this->cart);
 
-        $amountReceivable = array_reduce($this->cart, function ($sum, $product) {
-            $sum += $product['price'] * $product['quantity'];
-            return $sum;
-        }, 0);
-
-        DB::transaction(function () use ($products, $amountReceivable) {
+        DB::transaction(function () use ($products) {
             $order = auth()->user()->orders()->create([
                 'status' => Order::STATUS['holding'],
                 'amount_received' => 0,
-                'amount_receivable' => $amountReceivable,
+                'amount_receivable' => $this->calculateAmountReceivable(),
             ]);
             foreach ($products as $product) {
                 $order->products()->create($product);
@@ -71,5 +70,13 @@ class Cashier extends Component
         });
 
         $this->cart = [];
+    }
+
+    public function calculateAmountReceivable()
+    {
+        return array_reduce($this->cart, function ($sum, $product) {
+            $sum += $product['price'] * $product['quantity'];
+            return $sum;
+        }, 0);
     }
 }

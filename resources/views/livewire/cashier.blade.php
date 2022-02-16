@@ -87,53 +87,49 @@
     </div>
     <div class="w-1/4">
         <ul class="flex-1 flex flex-col p-2 overflow-y-auto h-[calc(100vh_-_180px)]">
-            <li class="flex justify-between p-2">
-                <div class="flex flex-col justify-between">
-                    <span class="text-2xl">Mojito</span>
-                </div>
-                <div>
-                    <span class="text-2xl">*1 </span>
-                    <span class="text-2xl">$300</span>
-                </div>
-            </li>
-            <li class="flex justify-between p-2">
-                <div class="flex flex-col justify-between">
-                    <span class="text-2xl">Manhattan</span>
-                </div>
-                <div>
-                    <span class="text-2xl">*2 </span>
-                    <span class="text-2xl">$600</span>
-                </div>
-            </li>
-            <li>
-                <hr>
-            </li>
-            <li class="flex justify-between p-2">
-                <div class="flex flex-col justify-between">
-                </div>
-                <div class="border-double">
-                    <span class="text-2xl">$900</span>
-                </div>
-            </li>
-            <li class="flex justify-between p-2">
-                <div class="flex flex-col justify-between">
-                    <span class="text-2xl">折扣</span>
-                </div>
-                <div class="border-double">
-                    <span class="text-2xl">-$400</span>
-                </div>
-            </li>
-            <li>
-                <hr>
-            </li>
-            <li class="flex justify-between p-2">
-                <div class="flex flex-col justify-between">
-                    <span class="text-2xl">總計</span>
-                </div>
-                <div class="border-double border-b-8 border-red-600">
-                    <span class="text-4xl">$500</span>
-                </div>
-            </li>
+            @foreach($this->cart as $product)
+                <li class="flex justify-between p-2">
+                    <div class="flex flex-col justify-between">
+                        <span class="text-2xl">{{$product['name']}}</span>
+                    </div>
+                    <div>
+                        <span class="text-2xl">*{{$product['quantity']}} </span>
+                        <span class="text-2xl">${{$product['price']}}</span>
+                    </div>
+                </li>
+            @endforeach
+
+            @if($amountReceivable)
+                <li>
+                    <hr>
+                </li>
+                {{--            <li class="flex justify-between p-2">--}}
+                {{--                <div class="flex flex-col justify-between">--}}
+                {{--                </div>--}}
+                {{--                <div class="border-double">--}}
+                {{--                    <span class="text-2xl">$900</span>--}}
+                {{--                </div>--}}
+                {{--            </li>--}}
+                {{--            <li class="flex justify-between p-2">--}}
+                {{--                <div class="flex flex-col justify-between">--}}
+                {{--                    <span class="text-2xl">折扣</span>--}}
+                {{--                </div>--}}
+                {{--                <div class="border-double">--}}
+                {{--                    <span class="text-2xl">-$400</span>--}}
+                {{--                </div>--}}
+                {{--            </li>--}}
+                {{--            <li>--}}
+                {{--                <hr>--}}
+                {{--            </li>--}}
+                <li class="flex justify-between p-2">
+                    <div class="flex flex-col justify-between">
+                        <span class="text-2xl">總計</span>
+                    </div>
+                    <div class="border-double border-b-8 border-red-600">
+                        <span class="text-4xl">${{$amountReceivable}}</span>
+                    </div>
+                </li>
+            @endif
         </ul>
         <div class="flex flex-col h-[180px]">
             <div class="flex mb-2">
