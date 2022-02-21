@@ -10,6 +10,8 @@ use Livewire\Component;
 class Cashier extends Component
 {
     public $showNewProductModal = false;
+    public $newProductName = '';
+    public $newProductPrice = '';
     public $cart = [];
 
     public function render()
@@ -24,18 +26,46 @@ class Cashier extends Component
     public function addToCartFromProductList($productId)
     {
         $cart = collect($this->cart);
+        $product = Product::select(['id', 'name', 'price'])->find($productId)->toArray();
 
-        if ($cart->firstWhere('id', $productId)) {
-            $this->cart = $cart->map(function ($product) use ($productId) {
-                if ($product['id'] === $productId) {
-                    $product['quantity']++;
+        if ($cart->where('name', $product['name'])->where('price', $product['price'])->count() > 0) {
+            $this->cart = $cart->map(function ($item) use ($product) {
+                if ($item['name'] === $product['name'] && $item['price'] === $product['price']) {
+                    $item['id'] = $product['id'];
+                    $item['quantity']++;
                 }
-                return $product;
+                return $item;
             })->toArray();
             return;
         }
 
-        $this->cart[] = Product::select(['id', 'name', 'price'])->find($productId)->toArray() + ['quantity' => 1];
+        $this->cart[] = $product + ['quantity' => 1];
+    }
+
+    public function addNewToCart()
+    {
+        $cart = collect($this->cart);
+
+        if ($cart->where('name', $this->newProductName)->where('price', $this->newProductPrice)->count() > 0) {
+            $this->cart = $cart->map(function ($item) {
+                if ($item['name'] === $this->newProductName && $item['price'] === (int)$this->newProductPrice) {
+                    $item['quantity']++;
+                }
+                return $item;
+            })->toArray();
+            $this->resetNewProduct();
+            $this->closeNewProductModal();
+            return;
+        }
+
+        $this->cart[] = [
+            'name' => $this->newProductName,
+            'price' => (int)$this->newProductPrice,
+            'quantity' => 1,
+        ];
+
+        $this->resetNewProduct();
+        $this->closeNewProductModal();
     }
 
     public function cartPlus($index)
@@ -84,5 +114,21 @@ class Cashier extends Component
     public function clear()
     {
         $this->cart = [];
+    }
+
+    public function resetNewProduct()
+    {
+        $this->newProductName = '';
+        $this->newProductPrice = '';
+    }
+
+    public function openNewProductModal()
+    {
+        $this->showNewProductModal = true;
+    }
+
+    public function closeNewProductModal()
+    {
+        $this->showNewProductModal = false;
     }
 }

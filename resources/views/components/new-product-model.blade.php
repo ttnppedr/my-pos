@@ -12,12 +12,13 @@
             >
                 <!-- Content -->
                 <div class="flex flex-col items-center">
-                    <input type="text" class="w-3/4 rounded text-3xl" placeholder="名稱">
-                    <input type="text" class="mt-2 w-3/4 rounded text-3xl" placeholder="價格">
+                    <input type="text" class="w-3/4 rounded text-3xl" placeholder="名稱" wire:model="newProductName">
+                    <input type="text" class="mt-2 w-3/4 rounded text-3xl" placeholder="價格" wire:model="newProductPrice">
                 </div>
                 <!-- Buttons -->
                 <div class="mt-4 flex space-x-2 justify-center">
                     <button type="button"
+                            wire:click="addNewToCart"
                             class="p-2 text-5xl font-bold rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
                         新增
                     </button>
