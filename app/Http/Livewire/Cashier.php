@@ -9,6 +9,7 @@ use Livewire\Component;
 
 class Cashier extends Component
 {
+    public $showNewProductModal = false;
     public $cart = [];
 
     public function render()
@@ -16,7 +17,7 @@ class Cashier extends Component
         return view('livewire.cashier', [
             'products' => Product::all(['id', 'name', 'price']),
             'cart' => $this->cart,
-            'amountReceivable' => $this->calculateAmountReceivable()
+            'amountReceivable' => $this->calculateAmountReceivable(),
         ]);
     }
 

@@ -34,7 +34,6 @@
         <ul class="flex-1 flex flex-col p-2 overflow-y-auto h-screen">
 
             @foreach($cart as $index => $product)
-
                 <li wire:key="cart-{{$index}}"
                     class="flex flex-col justify-between p-4 bg-gray-200 rounded-3xl mb-3 border border-black">
                     <div class="flex justify-between mb-2">
@@ -71,13 +70,17 @@
 
             <li class="flex justify-center bg-gray-200 rounded-3xl mb-3 border border-black">
                 <button type="button" class="text-blue-700 rounded-3xl border flex-1 flex justify-center"
-                        @click="openNewItemModal = true">
+                        wire:click="$set('showNewProductModal',true)"
+                >
                     <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
                 </button>
+                @if($showNewProductModal)
+                    <x-new-product-model></x-new-product-model>
+                @endif
             </li>
         </ul>
     </div>
@@ -149,37 +152,6 @@
                         class="w-1/2 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-red-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     結帳
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="hidden fixed inset-0 overflow-y-auto">
-        <div x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
-        <div
-            x-transition
-            class="relative min-h-screen flex items-center justify-center p-4"
-        >
-            <div
-                x-on:click.stop
-                x-trap.noscroll.inert="openNewItemModal"
-                class="relative max-w-3xl w-full bg-white border border-black p-8 overflow-y-auto rounded-2xl"
-            >
-                <!-- Content -->
-                <div class="flex flex-col items-center">
-                    <input type="text" class="w-3/4 rounded text-3xl" placeholder="名稱">
-                    <input type="text" class="mt-2 w-3/4 rounded text-3xl" placeholder="價格">
-                </div>
-                <!-- Buttons -->
-                <div class="mt-4 flex space-x-2 justify-center">
-                    <button type="button"
-                            class="p-2 text-5xl font-bold rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
-                        新增
-                    </button>
-                    <button type="button"
-                            class="p-2 text-5xl font-bold rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
-                        取消
-                    </button>
-                </div>
             </div>
         </div>
     </div>
