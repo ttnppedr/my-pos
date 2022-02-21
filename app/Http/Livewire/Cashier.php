@@ -92,6 +92,13 @@ class Cashier extends Component
             return array_merge($product, ['product_id' => $product['id']]);
         }, $this->cart);
 
+        $this->orderId === null ? $this->createOrder($products) : $this->updateOrder($products);
+
+        $this->clear();
+    }
+
+    public function createOrder($products)
+    {
         DB::transaction(function () use ($products) {
             $order = auth()->user()->orders()->create([
                 'status' => Order::STATUS['holding'],
@@ -102,8 +109,22 @@ class Cashier extends Component
                 $order->products()->create($product);
             }
         });
+    }
 
-        $this->cart = [];
+    public function updateOrder($products)
+    {
+        $order = Order::find($this->orderId);
+        DB::transaction(function () use ($order, $products) {
+            $order->update([
+                'amount_receivable' => $this->calculateAmountReceivable(),
+            ]);
+            foreach ($order->products as $product) {
+                $product->delete();
+            }
+            foreach ($products as $product) {
+                $order->products()->create($product);
+            }
+        });
     }
 
     public function calculateAmountReceivable()
@@ -117,6 +138,7 @@ class Cashier extends Component
     public function clear()
     {
         $this->cart = [];
+        $this->orderId = null;
     }
 
     public function resetNewProduct()
@@ -144,8 +166,6 @@ class Cashier extends Component
     public function viewProduct()
     {
         $this->viewing = 'product';
-        $this->orderId = null;
-        $this->clear();
     }
 
     public function showOrderContent($orderId)
