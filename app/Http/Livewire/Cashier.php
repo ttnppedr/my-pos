@@ -13,11 +13,14 @@ class Cashier extends Component
     public $newProductName = '';
     public $newProductPrice = '';
     public $cart = [];
+    public $viewing = 'product';
+    public $orderId;
 
     public function render()
     {
         return view('livewire.cashier', [
             'products' => Product::all(['id', 'name', 'price']),
+            'orders' => Order::where('status', Order::STATUS['holding'])->with(['products'])->get(['id', 'amount_receivable']),
             'cart' => $this->cart,
             'amountReceivable' => $this->calculateAmountReceivable(),
         ]);
@@ -130,5 +133,27 @@ class Cashier extends Component
     public function closeNewProductModal()
     {
         $this->showNewProductModal = false;
+    }
+
+    public function viewOrder()
+    {
+        $this->viewing = 'order';
+        $this->clear();
+    }
+
+    public function viewProduct()
+    {
+        $this->viewing = 'product';
+        $this->orderId = null;
+        $this->clear();
+    }
+
+    public function showOrderContent($orderId)
+    {
+        $this->orderId = $orderId;
+        $order = Order::with(['products'])->find($orderId);
+        $this->cart = collect($order->products->map(function ($product) {
+            return $product->only(['id', 'name', 'price', 'quantity']);
+        }))->toArray();
     }
 }

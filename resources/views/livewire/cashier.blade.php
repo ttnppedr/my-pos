@@ -4,10 +4,12 @@
             <div class="py-2 pl-2">
                 <span class="relative z-0 inline-flex shadow-sm rounded-md">
                     <button type="button"
+                            wire:click="viewProduct"
                             class="-ml-px relative inline-flex items-center px-4 py-2 ml-1 rounded-md border border-gray-500 bg-white text-lg font-medium text-gray-700">
                         商品
                     </button>
                     <button type="button"
+                            wire:click="viewOrder"
                             class="-ml-px relative inline-flex items-center px-4 py-2 ml-1 rounded-md border border-gray-500 bg-white text-lg font-medium text-gray-700">
                         訂單
                     </button>
@@ -16,17 +18,34 @@
         </div>
         <div>
             <ul class="flex-1 flex flex-col p-2 overflow-y-auto h-[calc(100vh_-_60px)] overflow-x-hidden">
-                @foreach($products as $product)
-                    <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
-                        <button wire:click="addToCartFromProductList({{$product->id}})"
-                                class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
-                        >
-                        <span
-                            class="text-5xl font-semibold text-blue-500 whitespace-nowrap">{{$product->name}}</span>
-                            <span class="text-5xl font-semibold text-blue-500">${{$product->price}}</span>
-                        </button>
-                    </li>
-                @endforeach
+                @if($viewing === 'product')
+                    @foreach($products as $product)
+                        <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                            <button wire:click="addToCartFromProductList({{$product->id}})"
+                                    class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                            >
+                                <span class="text-5xl font-semibold text-blue-500 whitespace-nowrap">{{$product->name}}</span>
+                                <span class="text-5xl font-semibold text-blue-500">${{$product->price}}</span>
+                            </button>
+                        </li>
+                    @endforeach
+                @endif
+                @if($viewing === 'order')
+                    @foreach($orders as $order)
+                        <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                            <button wire:click="showOrderContent({{$order->id}})"
+                                    class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                            >
+                                <div class="text-3xl font-semibold text-blue-500 whitespace-nowrap">
+                                    @foreach($order->products as $product)
+                                        <span>{{$product->name}}</span> <span>*{{$product->quantity}}</span><br>
+                                    @endforeach
+                                </div>
+                                <span class="text-5xl font-semibold text-blue-500">${{$order->amount_receivable}}</span>
+                            </button>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
         </div>
     </div>
