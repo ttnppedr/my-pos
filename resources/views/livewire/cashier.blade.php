@@ -151,26 +151,22 @@
         </ul>
         <div class="flex flex-col h-[180px]">
             <div class="flex mb-2">
-                <button type="button"
-                        wire:click="clear"
-                        class="w-1/2 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    取消
-                </button>
-                <button type="button"
-                        class="w-1/2 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    折扣
-                </button>
-            </div>
-            <div class="flex mb-2">
                 <button wire:click="save"
                         type="button"
                         class="w-1/2 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     儲存
                 </button>
                 <button type="button"
+                        wire:click="clear"
+                        class="w-1/2 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    取消
+                </button>
+            </div>
+            <div class="flex mb-2">
+                <button type="button"
                         wire:click="openCheckoutModal"
                         {{!$orderId ? 'disabled' : ''}}
-                        class="w-1/2 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-red-600 {{!$orderId ? 'bg-gray-400' : ''}}">
+                        class="flex-1 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-red-600 {{!$orderId ? 'bg-gray-400' : ''}}">
                     結帳
                 </button>
                 @if($showCheckoutModal)
