@@ -168,10 +168,14 @@
                     儲存
                 </button>
                 <button type="button"
+                        wire:click="openCheckoutModal"
                         {{!$orderId ? 'disabled' : ''}}
                         class="w-1/2 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-red-600 {{!$orderId ? 'bg-gray-400' : ''}}">
                     結帳
                 </button>
+                @if($showCheckoutModal)
+                    <x-checkout-model :amount-receivable="$amountReceivable"></x-checkout-model>
+                @endif
             </div>
         </div>
     </div>

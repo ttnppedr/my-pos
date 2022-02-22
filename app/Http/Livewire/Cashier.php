@@ -12,6 +12,8 @@ class Cashier extends Component
     public $showNewProductModal = false;
     public $newProductName = '';
     public $newProductPrice = '';
+    public $showCheckoutModal = false;
+    public $amountReceived = null;
     public $cart = [];
     public $viewing = 'product';
     public $orderId;
@@ -139,6 +141,7 @@ class Cashier extends Component
     {
         $this->cart = [];
         $this->orderId = null;
+        $this->amountReceived = null;
     }
 
     public function resetNewProduct()
@@ -155,6 +158,17 @@ class Cashier extends Component
     public function closeNewProductModal()
     {
         $this->showNewProductModal = false;
+    }
+
+    public function openCheckoutModal()
+    {
+        $this->amountReceived = $this->calculateAmountReceivable();
+        $this->showCheckoutModal = true;
+    }
+
+    public function closeCheckoutModal()
+    {
+        $this->showCheckoutModal = false;
     }
 
     public function viewOrder()
@@ -175,5 +189,15 @@ class Cashier extends Component
         $this->cart = collect($order->products->map(function ($product) {
             return $product->only(['id', 'name', 'price', 'quantity']);
         }))->toArray();
+    }
+
+    public function checkout()
+    {
+        Order::find($this->orderId)->update([
+            'status' => Order::STATUS['completed'],
+            'amount_received' => (int)$this->amountReceived,
+        ]);
+        $this->clear();
+        $this->closeCheckoutModal();
     }
 }
