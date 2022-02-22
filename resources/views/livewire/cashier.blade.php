@@ -168,7 +168,8 @@
                     儲存
                 </button>
                 <button type="button"
-                        class="w-1/2 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-red-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        {{!$orderId ? 'disabled' : ''}}
+                        class="w-1/2 h-20 px-6 py-3 mx-1 border border-transparent text-3xl font-bold rounded-md shadow-sm text-white bg-red-600 {{!$orderId ? 'bg-gray-400' : ''}}">
                     結帳
                 </button>
             </div>
