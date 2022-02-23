@@ -3,6 +3,32 @@
         <div class="text-center flex h-[60px] border-b-2 border-black">
             <div class="py-2 pl-2">
                 <div class="relative z-0 inline-flex shadow-sm rounded-md">
+                    <div x-data="{dropdownMenu: false}" class="relative">
+                        <!-- Dropdown toggle button -->
+                        <button @click="dropdownMenu = ! dropdownMenu"
+                                class="-ml-px relative inline-flex items-center px-4 py-2 ml-1 rounded-md border border-gray-500 bg-white text-lg font-medium text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <svg x-show="!dropdownMenu" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+                            </svg>
+                            <svg x-show="dropdownMenu" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11l7-7 7 7M5 19l7-7 7 7" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown list -->
+                        <div x-show="dropdownMenu"
+                             @click.away="dropdownMenu = false"
+                             class="absolute py-2 mt-2 bg-white rounded-md border border-gray-500 shadow-xl w-full">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="px-4 py-2 text-lg font-medium text-gray-700">
+                                    {{ __('登出') }}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                     <button type="button"
                             wire:click="viewProduct"
                             class="-ml-px relative inline-flex items-center px-4 py-2 ml-1 rounded-md border border-gray-500 bg-white text-lg font-medium text-gray-700">
