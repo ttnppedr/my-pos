@@ -206,4 +206,10 @@ class Cashier extends Component
         $this->clear();
         $this->closeCheckoutModal();
     }
+
+    public function deleteOrder()
+    {
+        $order = Order::find($this->orderId);
+        $order->delete();
+    }
 }
