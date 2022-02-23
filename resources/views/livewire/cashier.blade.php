@@ -211,13 +211,15 @@
 </div>
 
 <script>
-    var elem = document.getElementById("cashier");
+    const elem = document.getElementById("cashier");
     function openFullscreen() {
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
-        } else if (elem.webkitRequestFullscreen) { /* Safari */
-            elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { /* IE11 */
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullScreen) {
+            elem.webkitRequestFullScreen();
+        } else if (elem.msRequestFullscreen) {
             elem.msRequestFullscreen();
         }
     }
