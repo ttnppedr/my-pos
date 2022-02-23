@@ -193,7 +193,11 @@ class Cashier extends Component
 
     public function checkout()
     {
-        $this->save();
+        $products = array_map(function ($product) {
+            return array_merge($product, ['product_id' => $product['id']]);
+        }, $this->cart);
+
+        $this->updateOrder($products);
 
         Order::find($this->orderId)->update([
             'status' => Order::STATUS['completed'],
