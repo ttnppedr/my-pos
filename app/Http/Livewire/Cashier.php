@@ -193,6 +193,8 @@ class Cashier extends Component
 
     public function checkout()
     {
+        $this->save();
+
         Order::find($this->orderId)->update([
             'status' => Order::STATUS['completed'],
             'amount_received' => (int)$this->amountReceived,
