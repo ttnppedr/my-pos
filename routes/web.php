@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', \App\Http\Livewire\Home::class)->name('home');
-Route::get('/products', \App\Http\Livewire\Products::class)->name('products');
-Route::get('/cart', \App\Http\Livewire\Cart::class)->name('cart');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/cashier', \App\Http\Livewire\Cashier::class)->name('cashier');
 
