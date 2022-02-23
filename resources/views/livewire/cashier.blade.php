@@ -1,8 +1,8 @@
-<div class="flex h-screen">
+<div class="flex h-screen bg-white" id="cashier">
     <div class="w-1/3">
         <div class="text-center flex h-[60px] border-b-2 border-black">
             <div class="py-2 pl-2">
-                <span class="relative z-0 inline-flex shadow-sm rounded-md">
+                <div class="relative z-0 inline-flex shadow-sm rounded-md">
                     <button type="button"
                             wire:click="viewProduct"
                             class="-ml-px relative inline-flex items-center px-4 py-2 ml-1 rounded-md border border-gray-500 bg-white text-lg font-medium text-gray-700">
@@ -13,7 +13,14 @@
                             class="-ml-px relative inline-flex items-center px-4 py-2 ml-1 rounded-md border border-gray-500 bg-white text-lg font-medium text-gray-700">
                         訂單
                     </button>
-                </span>
+                    <button type="button"
+                            onclick="openFullscreen();"
+                            class="-ml-px relative inline-flex items-center px-4 py-2 ml-1 rounded-md border border-gray-500 bg-white text-lg font-medium text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
         <div>
@@ -176,3 +183,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    var elem = document.getElementById("cashier");
+    function openFullscreen() {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+        }
+    }
+</script>
