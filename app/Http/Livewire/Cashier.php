@@ -22,10 +22,20 @@ class Cashier extends Component
     {
         return view('livewire.cashier', [
             'products' => Product::all(['id', 'name', 'price']),
-            'orders' => Order::where('status', Order::STATUS['holding'])->with(['products'])->get(['id', 'amount_receivable']),
+            'orders' => Order::where('status', Order::STATUS['holding'])->with(['products'])->get([
+                'id', 'amount_receivable'
+            ]),
             'cart' => $this->cart,
             'amountReceivable' => $this->calculateAmountReceivable(),
         ]);
+    }
+
+    public function calculateAmountReceivable()
+    {
+        return array_reduce($this->cart, function ($sum, $product) {
+            $sum += $product['price'] * $product['quantity'];
+            return $sum;
+        }, 0);
     }
 
     public function addToCartFromProductList($productId)
@@ -53,7 +63,7 @@ class Cashier extends Component
 
         if ($cart->where('name', $this->newProductName)->where('price', $this->newProductPrice)->count() > 0) {
             $this->cart = $cart->map(function ($item) {
-                if ($item['name'] === $this->newProductName && $item['price'] === (int)$this->newProductPrice) {
+                if ($item['name'] === $this->newProductName && $item['price'] === (int) $this->newProductPrice) {
                     $item['quantity']++;
                 }
                 return $item;
@@ -65,12 +75,23 @@ class Cashier extends Component
 
         $this->cart[] = [
             'name' => $this->newProductName,
-            'price' => (int)$this->newProductPrice,
+            'price' => (int) $this->newProductPrice,
             'quantity' => 1,
         ];
 
         $this->resetNewProduct();
         $this->closeNewProductModal();
+    }
+
+    public function resetNewProduct()
+    {
+        $this->newProductName = '';
+        $this->newProductPrice = '';
+    }
+
+    public function closeNewProductModal()
+    {
+        $this->showNewProductModal = false;
     }
 
     public function cartPlus($index)
@@ -116,6 +137,11 @@ class Cashier extends Component
         });
     }
 
+    public function isCartEmpty()
+    {
+        return empty($this->cart);
+    }
+
     public function updateOrder($products)
     {
         $order = Order::find($this->orderId);
@@ -132,14 +158,6 @@ class Cashier extends Component
         });
     }
 
-    public function calculateAmountReceivable()
-    {
-        return array_reduce($this->cart, function ($sum, $product) {
-            $sum += $product['price'] * $product['quantity'];
-            return $sum;
-        }, 0);
-    }
-
     public function clear()
     {
         $this->cart = [];
@@ -147,31 +165,15 @@ class Cashier extends Component
         $this->amountReceived = null;
     }
 
-    public function resetNewProduct()
-    {
-        $this->newProductName = '';
-        $this->newProductPrice = '';
-    }
-
     public function openNewProductModal()
     {
         $this->showNewProductModal = true;
-    }
-
-    public function closeNewProductModal()
-    {
-        $this->showNewProductModal = false;
     }
 
     public function openCheckoutModal()
     {
         $this->amountReceived = $this->calculateAmountReceivable();
         $this->showCheckoutModal = true;
-    }
-
-    public function closeCheckoutModal()
-    {
-        $this->showCheckoutModal = false;
     }
 
     public function viewOrder()
@@ -204,10 +206,15 @@ class Cashier extends Component
 
         Order::find($this->orderId)->update([
             'status' => Order::STATUS['completed'],
-            'amount_received' => (int)$this->amountReceived,
+            'amount_received' => (int) $this->amountReceived,
         ]);
         $this->clear();
         $this->closeCheckoutModal();
+    }
+
+    public function closeCheckoutModal()
+    {
+        $this->showCheckoutModal = false;
     }
 
     public function deleteOrder()
@@ -215,10 +222,5 @@ class Cashier extends Component
         $order = Order::find($this->orderId);
         $order->delete();
         $this->clear();
-    }
-
-    public function isCartEmpty()
-    {
-        return empty($this->cart);
     }
 }

@@ -23,8 +23,8 @@ class Order extends Model
 
     public function getDetailAttribute()
     {
-        return  implode(', ', $this->products->reduce(function ($arr, $product) {
-            $arr[] = $product->name . ' *' .$product->quantity;
+        return implode(', ', $this->products->reduce(function ($arr, $product) {
+            $arr[] = $product->name.' *'.$product->quantity;
             return $arr;
         }, []));
     }
