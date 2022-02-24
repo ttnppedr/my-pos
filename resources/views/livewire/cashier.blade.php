@@ -107,7 +107,7 @@
                                 </svg>
                             </button>
                             <input type="text" value="{{$product['quantity']}}" disabled
-                                   class="mx-3 shadow-sm block w-1/4 border-4 border-gray-500 px-4 rounded-lg text-gray-500 text-3xl"
+                                   class="mx-3 shadow-sm block w-1/4 border-4 border-gray-500 px-4 rounded-lg text-gray-500 text-3xl text-center"
                             >
                             <button type="button"
                                     wire:click="cartPlus({{$index}})"
