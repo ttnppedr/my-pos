@@ -1,6 +1,6 @@
 <div class="flex h-screen bg-white" id="cashier">
     <div class="w-1/3">
-        <div class="text-center flex h-[60px] border-b-2 border-black">
+        <div class="flex h-[60px] border-b-2 border-black">
             <div class="py-2 pl-2">
                 <div class="relative z-0 inline-flex shadow-sm rounded-md">
                     <div x-data="{dropdownMenu: false}" class="relative">
@@ -65,16 +65,19 @@
                 @endif
                 @if($viewing === 'order')
                     @foreach($orders as $order)
-                        <li class="flex justify-between bg-gray-200 rounded-3xl mb-3 border border-slate-600">
+                        <li class="flex bg-gray-200 rounded-3xl mb-3 border border-slate-600">
                             <button wire:click="showOrderContent({{$order->id}})"
-                                    class="flex flex-1 justify-between items-center p-4 rounded-3xl bg-gray-200 "
+                                    class="flex flex-1 flex-col p-4 rounded-3xl bg-gray-200 "
                             >
-                                <div class="text-3xl font-semibold text-blue-500 whitespace-nowrap">
-                                    @foreach($order->products as $product)
-                                        <span>{{$product->name}}</span> <span>*{{$product->quantity}}</span><br>
-                                    @endforeach
+                                <div class="flex flex-1 justify-between">
+                                    <span class="text-5xl font-semibold text-blue-500" >{{$order->id}}</span>
+                                    <span class="text-5xl font-semibold text-blue-500">${{$order->amount_receivable}}</span>
                                 </div>
-                                <span class="text-5xl font-semibold text-blue-500">${{$order->amount_receivable}}</span>
+                                <div class="text-left">
+                                    <span class="text-2xl font-semibold text-blue-500">
+                                        {{$order->detail}}
+                                    </span>
+                                </div>
                             </button>
                         </li>
                     @endforeach
@@ -104,7 +107,7 @@
                                 </svg>
                             </button>
                             <input type="text" value="{{$product['quantity']}}" disabled
-                                   class="mx-3 shadow-sm block w-1/4 border-4 border-gray-500 px-4 rounded-lg text-center text-gray-500 text-3xl"
+                                   class="mx-3 shadow-sm block w-1/4 border-4 border-gray-500 px-4 rounded-lg text-gray-500 text-3xl"
                             >
                             <button type="button"
                                     wire:click="cartPlus({{$index}})"

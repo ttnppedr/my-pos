@@ -20,4 +20,12 @@ class Order extends Model
     {
         return $this->hasMany(OrderProduct::class);
     }
+
+    public function getDetailAttribute()
+    {
+        return  implode(', ', $this->products->reduce(function ($arr, $product) {
+            $arr[] = $product->name . ' *' .$product->quantity;
+            return $arr;
+        }, []));
+    }
 }
