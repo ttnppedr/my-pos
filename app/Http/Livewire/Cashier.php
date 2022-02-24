@@ -101,6 +101,9 @@ class Cashier extends Component
 
     public function createOrder($products)
     {
+        if ($this->isCartEmpty()) {
+            return;
+        }
         DB::transaction(function () use ($products) {
             $order = auth()->user()->orders()->create([
                 'status' => Order::STATUS['holding'],
@@ -211,5 +214,10 @@ class Cashier extends Component
     {
         $order = Order::find($this->orderId);
         $order->delete();
+    }
+
+    public function isCartEmpty()
+    {
+        return empty($this->cart);
     }
 }
