@@ -8,8 +8,6 @@ class OrderObserver
 {
     public function deleting(Order $order)
     {
-        foreach ($order->products as $product) {
-            $product->delete();
-        }
+        $order->products()->delete();
     }
 }
