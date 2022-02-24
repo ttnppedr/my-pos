@@ -214,6 +214,7 @@ class Cashier extends Component
     {
         $order = Order::find($this->orderId);
         $order->delete();
+        $this->clear();
     }
 
     public function isCartEmpty()
