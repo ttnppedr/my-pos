@@ -1,10 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
-
-        <x-jet-validation-errors class="mb-4" />
+        <div class="flex justify-center mb-[44px]"><span class="text-[32px] font-semibold">登 入</span></div>
+        <x-jet-validation-errors class="mb-4"/>
 
         @if (session('status'))
             <div class="mb-4 font-medium text-sm text-green-600">
@@ -15,20 +12,28 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            <div class="mb-[25px]">
+                <x-jet-label for="email" class="text-2xl" required value="帳號"/>
+                <x-jet-input id="email"
+                             class="h-[50px] block mt-1 w-full bg-[#f8f8f8] border-[#d8d8d8] text-xl px-[16px] py-[12px]"
+                             type="email"
+                             name="email"
+                             :value="old('email')"
+                             required autofocus/>
             </div>
 
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+            <div class="mb-[50px]">
+                <x-jet-label for="password" class="text-2xl" required value="密碼"/>
+                <x-jet-input id="password"
+                             class="h-[50px] block mt-1 w-full bg-[#f8f8f8] border-[#d8d8d8] text-xl px-[16px] py-[12px]"
+                             type="password"
+                             name="password"
+                             required
+                             autocomplete="current-password"/>
             </div>
 
-            <div class="flex items-center justify-center mt-6">
-                <x-jet-button class="w-full h-10">
-                    {{ __('Log in') }}
-                </x-jet-button>
+            <div class="flex items-center justify-center mb-[25px]">
+                <x-jet-button class="w-full h-[50px] text-2xl bg-[#0f375b] justify-center py-[9px]">登 入</x-jet-button>
             </div>
         </form>
     </x-jet-authentication-card>
