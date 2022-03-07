@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/orders', Orders::class)->name('orders');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/orders', Orders::class)->name('orders');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
 Route::get('/{any}', function () {
     return redirect()->route('login');
