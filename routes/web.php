@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Product;
+use App\Http\Livewire\Orders;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/cashier', \App\Http\Livewire\Cashier::class)->name('cashier');
+Route::middleware(['auth:sanctum', 'verified'])->get('/orders', Orders::class)->name('orders');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

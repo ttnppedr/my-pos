@@ -1,3 +1,3 @@
 <x-app-layout>
-    <script>window.location = "/cashier";</script>
+    <script>window.location = "/orders";</script>
 </x-app-layout>
