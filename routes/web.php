@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\NewOrder;
 use App\Http\Livewire\Orders;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/orders', Orders::class)->name('orders');
+    Route::get('/new-order', NewOrder::class)->name('new-order');
 
     Route::get('/dashboard', function () {
         return view('dashboard');

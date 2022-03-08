@@ -8,7 +8,8 @@
                     </button>
                 </li>
                 <li>
-                    <button class="bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4">新增</button>
+                    <button class="bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4"><a href="new-order">新增</a>
+                    </button>
                 </li>
                 <li>
                     <button
