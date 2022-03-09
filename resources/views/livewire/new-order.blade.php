@@ -3,7 +3,9 @@
         <div class="w-2/3">
             <div class="bg-[#f8f8f8] h-screen overflow-y-auto h-[calc(100vh_-_80px)] overflow-x-hidden">
                 <div class="py-4 px-6 grid grid-cols-2 gap-x-4 gap-y-6 text-[#0f375b]">
-                    <div class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer">
+                    <div class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer"
+                         wire:click="$set('showNewProductModal',true)"
+                    >
                         <div class=" text-2xl text-center">
                             <span>其他品項</span>
                         </div>
@@ -90,4 +92,7 @@
             </div>
         </div>
     </div>
+    @if($showNewProductModal)
+        <x-new-product-modal></x-new-product-modal>
+    @endif
 </div>

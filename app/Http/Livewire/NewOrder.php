@@ -9,6 +9,10 @@ class NewOrder extends Component
 {
     public $cart = [];
 
+    public $showNewProductModal = false;
+    public $newProductName;
+    public $newProductPrice;
+
     public function render()
     {
         return view('livewire.new-order', [
@@ -43,5 +47,42 @@ class NewOrder extends Component
         }
 
         $this->cart[] = $product + ['quantity' => 1];
+    }
+
+    public function addNewToCart()
+    {
+        $cart = collect($this->cart);
+
+        if ($cart->where('name', $this->newProductName)->where('price', $this->newProductPrice)->count() > 0) {
+            $this->cart = $cart->map(function ($item) {
+                if ($item['name'] === $this->newProductName && $item['price'] === (int) $this->newProductPrice) {
+                    $item['quantity']++;
+                }
+                return $item;
+            })->toArray();
+            $this->resetNewProduct();
+            $this->closeNewProductModal();
+            return;
+        }
+
+        $this->cart[] = [
+            'name' => $this->newProductName,
+            'price' => (int) $this->newProductPrice,
+            'quantity' => 1,
+        ];
+
+        $this->resetNewProduct();
+        $this->closeNewProductModal();
+    }
+
+    public function resetNewProduct()
+    {
+        $this->newProductName = null;
+        $this->newProductPrice = null;
+    }
+
+    public function closeNewProductModal()
+    {
+        $this->showNewProductModal = false;
     }
 }
