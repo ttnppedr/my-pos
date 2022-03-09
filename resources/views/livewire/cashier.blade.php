@@ -144,7 +144,7 @@
                     </svg>
                 </button>
                 @if($showNewProductModal)
-                    <x-new-product-model></x-new-product-model>
+                    <x-new-product-modal></x-new-product-modal>
                 @endif
             </li>
         </ul>
@@ -223,7 +223,7 @@
                     刪除
                 </button>
                 @if($showCheckoutModal)
-                    <x-checkout-model :amount-receivable="$amountReceivable"></x-checkout-model>
+                    <x-checkout-modal :amount-receivable="$amountReceivable"></x-checkout-modal>
                 @endif
             </div>
         </div>
