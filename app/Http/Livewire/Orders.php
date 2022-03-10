@@ -13,4 +13,9 @@ class Orders extends Component
             'orders' => Order::where('status', Order::STATUS['holding'])->with(['products'])->get(),
         ]);
     }
+
+    public function redirectTo($orderId)
+    {
+        return redirect()->route('show-order', ['order' => $orderId]);
+    }
 }
