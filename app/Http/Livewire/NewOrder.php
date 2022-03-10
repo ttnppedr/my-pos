@@ -75,7 +75,7 @@ class NewOrder extends Component
         $this->closeNewProductModal();
     }
 
-    public function resetNewProduct()
+    protected function resetNewProduct()
     {
         $this->newProductName = null;
         $this->newProductPrice = null;
@@ -84,5 +84,30 @@ class NewOrder extends Component
     public function closeNewProductModal()
     {
         $this->showNewProductModal = false;
+    }
+
+    public function clearCart()
+    {
+        $this->cart = [];
+    }
+
+    public function cartPlus($index)
+    {
+        $this->cart[$index]['quantity']++;
+    }
+
+    public function cartMinus($index)
+    {
+        if ($this->cart[$index]['quantity'] - 1 === 0) {
+            unset($this->cart[$index]);
+            return;
+        }
+
+        $this->cart[$index]['quantity']--;
+    }
+
+    public function cartDelete($index)
+    {
+        unset($this->cart[$index]);
     }
 }
