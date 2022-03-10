@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class NewOrder extends Component
@@ -86,11 +88,6 @@ class NewOrder extends Component
         $this->showNewProductModal = false;
     }
 
-    public function clearCart()
-    {
-        $this->cart = [];
-    }
-
     public function cartPlus($index)
     {
         $this->cart[$index]['quantity']++;
@@ -106,8 +103,39 @@ class NewOrder extends Component
         $this->cart[$index]['quantity']--;
     }
 
-    public function cartDelete($index)
+    public function cartItemDelete($index)
     {
         unset($this->cart[$index]);
+    }
+
+    public function save()
+    {
+        $products = array_map(function ($product) {
+            return array_merge($product, ['product_id' => $product['id']]);
+        }, $this->cart);
+
+        $this->createOrder($products);
+
+        $this->clearCart();
+        return redirect()->route('orders');
+    }
+
+    public function createOrder($products)
+    {
+        DB::transaction(function () use ($products) {
+            $order = auth()->user()->orders()->create([
+                'status' => Order::STATUS['holding'],
+                'amount_received' => 0,
+                'amount_receivable' => $this->calculateAmountReceivable(),
+            ]);
+            foreach ($products as $product) {
+                $order->products()->create($product);
+            }
+        });
+    }
+
+    public function clearCart()
+    {
+        $this->cart = [];
     }
 }

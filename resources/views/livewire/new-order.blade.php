@@ -63,7 +63,7 @@
                             </div>
                             <div class="flex items-center">
                                 <button
-                                    wire:click="cartDelete({{$index}})"
+                                    wire:click="cartItemDelete({{$index}})"
                                     class="flex justify-center items-center bg-[#fce2e2] rounded w-[44px] h-[44px]">
                                     <svg width="22" height="25" viewBox="0 0 22 25" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -82,10 +82,10 @@
                     <span>$ {{number_format($amountReceivable, 0, '', ',')}}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-3 px-3 py-4">
-                    <x-disablable-button type="outline">取 消</x-disablable-button>
-                    <x-disablable-button type="primary">儲 存</x-disablable-button>
-                    <x-disablable-button type="danger">刪 除</x-disablable-button>
-                    <x-disablable-button type="normal">結 帳</x-disablable-button>
+                    <x-disablable-button type="outline" wire:click="clearCart">取 消</x-disablable-button>
+                    <x-disablable-button type="primary" wire:click="save">儲 存</x-disablable-button>
+                    <x-disablable-button type="danger" disabled>刪 除</x-disablable-button>
+                    <x-disablable-button type="normal" disabled>結 帳</x-disablable-button>
                 </div>
             </div>
         </div>
