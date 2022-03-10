@@ -6,13 +6,13 @@
                 <button
                     wire:click="redirectTo({{$order->id}})"
                 >
-                    <div class="bg-white p-4 font-bold border border-[#e5e5e5] rounded cursor-pointer"
+                    <div class="h-full bg-white p-4 font-bold border border-[#e5e5e5] rounded cursor-pointer"
                     >
                         <div class="flex justify-between mb-4 text-2xl">
                             <span>{{$order->note}}</span>
                             <span>${{number_format($order->amount_receivable, 0, '', ',')}}</span>
                         </div>
-                        <div class="text-[#2678c6] text-xl">
+                        <div class="text-[#2678c6] text-xl text-left">
                             {{$order->detail}}
                         </div>
                     </div>
