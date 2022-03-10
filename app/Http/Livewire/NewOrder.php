@@ -12,6 +12,7 @@ class NewOrder extends Component
     public $cart = [];
 
     public $showNewProductModal = false;
+    public $note;
     public $newProductName;
     public $newProductPrice;
 
@@ -19,7 +20,6 @@ class NewOrder extends Component
     {
         return view('livewire.new-order', [
             'products' => Product::all(),
-            'cart' => $this->cart,
             'amountReceivable' => $this->calculateAmountReceivable(),
         ]);
     }
@@ -111,7 +111,7 @@ class NewOrder extends Component
     public function save()
     {
         $products = array_map(function ($product) {
-            return array_merge($product, ['product_id' => $product['id']]);
+            return array_merge($product, ['product_id' => $product['id'] ?? null]);
         }, $this->cart);
 
         $this->createOrder($products);
@@ -131,6 +131,7 @@ class NewOrder extends Component
             foreach ($products as $product) {
                 $order->products()->create($product);
             }
+            $order->update(['note' => $this->note ?? $order->id]);
         });
     }
 

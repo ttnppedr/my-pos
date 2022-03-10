@@ -14,7 +14,7 @@ class Order extends Model
         'completed' => 2,
     ];
 
-    protected $fillable = ['user_id', 'status', 'amount_receivable', 'amount_received'];
+    protected $fillable = ['user_id', 'status', 'amount_receivable', 'amount_received', 'note'];
 
     public function products()
     {

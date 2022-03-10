@@ -25,7 +25,9 @@
         <div class="w-1/3 flex flex-col">
             <div class="flex p-4 text-2xl items-center justify-between border-b">
                 <span class="mr-4">桌號</span>
-                <input type="text" class="flex-1 w-full rounded bg-[#f8f8f8] border border-[#e5e5e5]">
+                <input
+                    wire:model="note"
+                    type="text" class="flex-1 w-full rounded bg-[#f8f8f8] border border-[#e5e5e5]">
             </div>
             <div class="overflow-y-auto h-[calc(100vh_-_365px)] overflow-x-hidden">
                 @foreach($cart as $index =>  $product)
