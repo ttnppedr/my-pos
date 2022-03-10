@@ -114,15 +114,14 @@ class NewOrder extends Component
             return array_merge($product, ['product_id' => $product['id'] ?? null]);
         }, $this->cart);
 
-        $this->createOrder($products);
+        $order = $this->createOrder($products);
 
-        $this->clearCart();
-        return redirect()->route('orders');
+        return redirect()->route('show-order', ['order' => $order]);
     }
 
     public function createOrder($products)
     {
-        DB::transaction(function () use ($products) {
+        return DB::transaction(function () use ($products) {
             $order = auth()->user()->orders()->create([
                 'status' => Order::STATUS['holding'],
                 'amount_received' => 0,
@@ -132,6 +131,8 @@ class NewOrder extends Component
                 $order->products()->create($product);
             }
             $order->update(['note' => $this->note ?? $order->id]);
+
+            return $order;
         });
     }
 
