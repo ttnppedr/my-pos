@@ -82,18 +82,10 @@
                     <span>$ {{number_format($amountReceivable, 0, '', ',')}}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-3 px-3 py-4">
-                    <button class="px-16 py-2 bg-[#e5e5e5] rounded"><span
-                            class="font-bold text-xl text-[#8d8d8d]">取 消</span>
-                    </button>
-                    <button class="px-16 py-2 bg-[#e5e5e5] rounded"><span
-                            class="font-bold text-xl text-[#8d8d8d]">儲 存</span>
-                    </button>
-                    <button class="px-16 py-2 bg-[#e5e5e5] rounded"><span
-                            class="font-bold text-xl text-[#8d8d8d]">刪 除</span>
-                    </button>
-                    <button class="px-16 py-2 bg-[#e5e5e5] rounded"><span
-                            class="font-bold text-xl text-[#8d8d8d]">結 帳</span>
-                    </button>
+                    <x-disablable-button type="outline">取 消</x-disablable-button>
+                    <x-disablable-button type="primary">儲 存</x-disablable-button>
+                    <x-disablable-button type="danger">刪 除</x-disablable-button>
+                    <x-disablable-button type="normal">結 帳</x-disablable-button>
                 </div>
             </div>
         </div>

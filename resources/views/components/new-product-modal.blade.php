@@ -36,16 +36,16 @@
                 </div>
                 <!-- Buttons -->
                 <div class="mt-4 flex space-x-2 justify-center">
-                    <button type="button"
-                            wire:click="$set('showNewProductModal',false)"
-                            class="flex flex-1 justify-center p-2 text-md font-semibold rounded-md bg-white text-[#0f375b] border border-[#0f275b]">
-                        取消
-                    </button>
-                    <button type="button"
-                            wire:click="addNewToCart"
-                            class="flex flex-1 justify-center p-2 text-md font-semibold rounded-md bg-[#0f375b] text-white border border-[#0f275b]">
-                        確認
-                    </button>
+                    <x-disablable-button type="outline"
+                                         class="flex flex-1"
+                                         wire:click="$set('showNewProductModal',false)"
+                    >取 消
+                    </x-disablable-button>
+                    <x-disablable-button type="primary"
+                                         class="flex flex-1"
+                                         wire:click="addNewToCart"
+                    >確 認
+                    </x-disablable-button>
                 </div>
             </div>
         </div>
