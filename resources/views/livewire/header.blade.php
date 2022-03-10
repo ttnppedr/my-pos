@@ -1,14 +1,16 @@
 <div>
     <div class="shadow-[0_1px_4px_1px_#e5e5e5] h-[80px] flex justify-between py-[15px] px-[25px] ">
-        <h1 class="text-3xl my-[4px]">訂單列表</h1>
+        <h1 class="text-3xl my-[4px]">@yield('title')</h1>
         <nav>
             <ul class="flex text-2xl">
                 <li>
-                    <button class="bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4"><a href="orders">訂單</a>
+                    <button class="bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4"><a
+                            href="{{route('orders')}}}">訂單</a>
                     </button>
                 </li>
                 <li>
-                    <button class="bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4"><a href="new-order">新增</a>
+                    <button class="bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4"><a
+                            href="{{route('new-order')}}">新增</a>
                     </button>
                 </li>
                 <li>

@@ -1,3 +1,4 @@
+@section('title', '新增訂單')
 <div>
     <div class="flex font-bold">
         <div class="w-2/3">
