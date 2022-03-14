@@ -85,8 +85,13 @@
                     <span>$ {{number_format($amountReceivable, 0, '', ',')}}</span>
                 </div>
                 <div class="grid grid-cols-2 gap-3 px-3 py-4">
-                    <x-disablable-button type="outline" wire:click="clearCart">取 消</x-disablable-button>
-                    <x-disablable-button type="primary" wire:click="save">儲 存</x-disablable-button>
+                    @if($this->isCartEmpty())
+                        <x-disablable-button type="outline" wire:click="clearCart" disabled>取 消</x-disablable-button>
+                        <x-disablable-button type="primary" wire:click="save" disabled>儲 存</x-disablable-button>
+                    @else
+                        <x-disablable-button type="outline" wire:click="clearCart">取 消</x-disablable-button>
+                        <x-disablable-button type="primary" wire:click="save">儲 存</x-disablable-button>
+                    @endif
                     <x-disablable-button type="danger" disabled>刪 除</x-disablable-button>
                     <x-disablable-button type="normal" disabled>結 帳</x-disablable-button>
                 </div>

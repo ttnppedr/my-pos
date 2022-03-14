@@ -32,6 +32,11 @@ class NewOrder extends Component
         }, 0);
     }
 
+    public function isCartEmpty()
+    {
+        return count($this->cart) === 0;
+    }
+
     public function addToCartFromProductList($productId)
     {
         $cart = collect($this->cart);
