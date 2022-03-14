@@ -12,9 +12,11 @@ class ShowOrder extends Component
     public $cart;
 
     public $showNewProductModal = false;
+    public $showDeleteOrderModal = false;
     public $note;
     public $newProductName;
     public $newProductPrice;
+    public $isEditing;
 
     public function mount(Order $order)
     {
@@ -82,5 +84,12 @@ class ShowOrder extends Component
 
         $this->resetNewProduct();
         $this->closeNewProductModal();
+    }
+
+    public function deleteOrder()
+    {
+        $this->order->delete();
+
+        return redirect()->route('orders');
     }
 }
