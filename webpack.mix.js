@@ -18,7 +18,8 @@ mix.js('resources/js/app.js', 'public/js')
     ]);
 
 mix.browserSync({
-    proxy: 'my-pos.test'
+    proxy: 'my-pos.test',
+    host: 'my-pos.test',
 });
 
 if (mix.inProduction()) {
