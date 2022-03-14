@@ -16,7 +16,7 @@
         @break
         @case('danger')
         <button
-            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#a71f23] rounded']) }}
+            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#a71f23] rounded ' . ($css ?? '')]) }}
         ><span
                 class="font-bold text-xl text-white {{$spanCss ?? ''}}">{{$slot}}</span>
         </button>
@@ -24,7 +24,7 @@
 
         @case('primary')
         <button
-            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#0f375b] rounded']) }}
+            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#0f375b] rounded ' . ($css ?? '')]) }}
         ><span
                 class="font-bold text-xl text-white {{$spanCss ?? ''}}">{{$slot}}</span>
         </button>
@@ -32,7 +32,7 @@
 
         @case('normal')
         <button
-            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#006941] rounded']) }}
+            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#006941] rounded ' . ($css ?? '')]) }}
         ><span
                 class="font-bold text-xl text-white {{$spanCss ?? ''}}">{{$slot}}</span>
         </button>
