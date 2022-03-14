@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ShowOrder extends Component
@@ -43,6 +44,10 @@ class ShowOrder extends Component
 
     public function addToCartFromProductList($productId)
     {
+        if (!$this->isEditing) {
+            return;
+        }
+
         $cart = collect($this->cart);
         $product = Product::select(['id', 'name', 'price'])->find($productId)->toArray();
 
@@ -62,6 +67,10 @@ class ShowOrder extends Component
 
     public function addNewToCart()
     {
+        if (!$this->isEditing) {
+            return;
+        }
+
         $cart = collect($this->cart);
 
         if ($cart->where('name', $this->newProductName)->where('price', $this->newProductPrice)->count() > 0) {
@@ -91,5 +100,58 @@ class ShowOrder extends Component
         $this->order->delete();
 
         return redirect()->route('orders');
+    }
+
+    public function cartPlus($index)
+    {
+        $this->cart[$index]['quantity']++;
+    }
+
+    public function cartMinus($index)
+    {
+        if ($this->cart[$index]['quantity'] - 1 === 0) {
+            unset($this->cart[$index]);
+            return;
+        }
+
+        $this->cart[$index]['quantity']--;
+    }
+
+    public function cartItemDelete($index)
+    {
+        unset($this->cart[$index]);
+    }
+
+    public function cancelEditing()
+    {
+        $this->cart = collect($this->order->products)->toArray();
+        $this->isEditing = false;
+    }
+
+    public function save()
+    {
+        $products = array_map(function ($product) {
+            return array_merge($product, ['product_id' => $product['id']]);
+        }, $this->cart);
+
+        $this->updateOrder($products);
+    }
+
+    public function updateOrder($products)
+    {
+        DB::transaction(function () use ($products) {
+            $this->order->update([
+                'amount_receivable' => $this->calculateAmountReceivable(),
+            ]);
+            foreach ($this->order->products as $product) {
+                $product->delete();
+            }
+            foreach ($products as $product) {
+                $this->order->products()->create($product);
+            }
+            $this->order->update(['note' => $this->note]);
+        });
+
+        $this->isEditing = false;
     }
 }

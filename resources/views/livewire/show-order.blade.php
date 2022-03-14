@@ -12,8 +12,10 @@
                         </div>
                     </div>
                     @foreach($products as $product)
-                        <div class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer"
-                             wire:click="addToCartFromProductList({{$product->id}})">
+                        <div
+                            class="bg-white px-4 py-5 border border-[#e5e5e5] rounded {{ $this->isEditing ? 'cursor-pointer' : '' }}"
+                            wire:click="addToCartFromProductList({{$product->id}})"
+                        >
                             <div class="flex justify-between text-2xl">
                                 <span>{{$product->name}}</span>
                                 <span>${{number_format($product->price, 0, '', ',')}}</span>
@@ -95,9 +97,9 @@
                 </div>
                 <div class="grid grid-cols-2 gap-3 px-3 py-4">
                     @if($isEditing)
-                        <x-disablable-button type="outline" wire:click="$set('isEditing',false)">取 消
+                        <x-disablable-button type="outline" wire:click="cancelEditing">取 消
                         </x-disablable-button>
-                        <x-disablable-button type="primary" wire:click="">儲 存</x-disablable-button>
+                        <x-disablable-button type="primary" wire:click="save">儲 存</x-disablable-button>
                         <x-disablable-button type="danger" disabled>刪 除</x-disablable-button>
                         <x-disablable-button type="normal" disabled>結 帳</x-disablable-button>
                     @else
