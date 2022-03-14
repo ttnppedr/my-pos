@@ -24,19 +24,21 @@
                     </button>
                 </li>
                 <li>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit"
-                                class="bg-[#0f375b] text-white h-[50px] w-[50px] rounded flex justify-center items-center">
-                            <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M3 21v3a6 6 0 0 0 6 6h15c3.315 0 6-2.685 6-6V6a6 6 0 0 0-6-6H9a6 6 0 0 0-6 6v3a1.5 1.5 0 0 0 3 0V6c0-1.656 1.344-3 3-3h15a3 3 0 0 1 3 3v18a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-3c0-.826-.672-1.5-1.5-1.5S3 20.174 3 21zm11.379-7.5-1.94-1.938a1.501 1.501 0 0 1 2.121-2.123l4.5 4.5a1.5 1.5 0 0 1 0 2.123l-4.5 4.5a1.501 1.501 0 0 1-2.12-2.123l1.939-1.939H1.5a1.5 1.5 0 0 1 0-3h12.879z"
-                                    fill="#FFF" fill-rule="evenodd"/>
-                            </svg>
-                        </button>
-                    </form>
+                    <button type="submit"
+                            class="bg-[#0f375b] text-white h-[50px] w-[50px] rounded flex justify-center items-center"
+                            wire:click="$set('showLogoutModal',true)"
+                    >
+                        <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M3 21v3a6 6 0 0 0 6 6h15c3.315 0 6-2.685 6-6V6a6 6 0 0 0-6-6H9a6 6 0 0 0-6 6v3a1.5 1.5 0 0 0 3 0V6c0-1.656 1.344-3 3-3h15a3 3 0 0 1 3 3v18a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-3c0-.826-.672-1.5-1.5-1.5S3 20.174 3 21zm11.379-7.5-1.94-1.938a1.501 1.501 0 0 1 2.121-2.123l4.5 4.5a1.5 1.5 0 0 1 0 2.123l-4.5 4.5a1.501 1.501 0 0 1-2.12-2.123l1.939-1.939H1.5a1.5 1.5 0 0 1 0-3h12.879z"
+                                fill="#FFF" fill-rule="evenodd"/>
+                        </svg>
+                    </button>
                 </li>
             </ul>
         </nav>
     </div>
+    @if($showLogoutModal)
+        <x-logout-modal></x-logout-modal>
+    @endif
 </div>
