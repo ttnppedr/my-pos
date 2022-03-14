@@ -26,12 +26,12 @@
                     <div class="w-full mb-4">
                         <div class="text-lg"><span class="text-red-700">*</span><span>名稱</span></div>
                         <input type="text" wire:model="newProductName"
-                               class="w-full h-10 px-4 py2 flex-1 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-xl">
+                               class="w-full h-10 px-4 py-2 flex-1 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-xl">
                     </div>
                     <div class="w-full mb-4">
                         <div class="text-lg"><span class="text-red-700">*</span><span>金額</span></div>
                         <input type="text" wire:model="newProductPrice"
-                               class="w-full h-10 px-4 py2 flex-1 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-xl">
+                               class="w-full h-10 px-4 py-2 flex-1 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-xl">
                     </div>
                 </div>
                 <!-- Buttons -->
