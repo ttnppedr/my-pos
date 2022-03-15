@@ -14,10 +14,12 @@ class ShowOrder extends Component
 
     public $showNewProductModal = false;
     public $showDeleteOrderModal = false;
+    public $showCheckoutModal = false;
     public $note;
     public $newProductName;
     public $newProductPrice;
     public $isEditing;
+    public $amountReceived;
 
     public function mount(Order $order)
     {
@@ -153,5 +155,15 @@ class ShowOrder extends Component
         });
 
         $this->isEditing = false;
+    }
+
+    public function checkout()
+    {
+        $this->order->update([
+            'status' => Order::STATUS['completed'],
+            'amount_received' => (int) $this->amountReceived,
+        ]);
+
+        return redirect()->route('orders');
     }
 }

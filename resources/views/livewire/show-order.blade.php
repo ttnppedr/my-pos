@@ -107,7 +107,8 @@
                         </x-disablable-button>
                         <x-disablable-button type="danger" wire:click="$set('showDeleteOrderModal', true)">刪 除
                         </x-disablable-button>
-                        <x-disablable-button type="normal">結 帳</x-disablable-button>
+                        <x-disablable-button type="normal" wire:click="$set('showCheckoutModal',true)">結 帳
+                        </x-disablable-button>
                     @endif
                 </div>
             </div>
@@ -118,5 +119,8 @@
     @endif
     @if($showDeleteOrderModal)
         <x-delete-order-modal></x-delete-order-modal>
+    @endif
+    @if($showCheckoutModal)
+        <x-checkout-modal amountReceivable="{{$amountReceivable}}"></x-checkout-modal>
     @endif
 </div>
