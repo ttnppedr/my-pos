@@ -97,6 +97,17 @@ class ShowOrder extends Component
         $this->closeNewProductModal();
     }
 
+    public function resetNewProduct()
+    {
+        $this->newProductName = '';
+        $this->newProductPrice = '';
+    }
+
+    public function closeNewProductModal()
+    {
+        $this->showNewProductModal = false;
+    }
+
     public function deleteOrder()
     {
         $this->order->delete();
@@ -133,7 +144,11 @@ class ShowOrder extends Component
     public function save()
     {
         $products = array_map(function ($product) {
-            return array_merge($product, ['product_id' => $product['id']]);
+            if (isset($product['order_id'])) {
+                return array_merge($product, ['product_id' => $product['product_id'] ?? null]);
+            } else {
+                return array_merge($product, ['product_id' => $product['id'] ?? null]);
+            }
         }, $this->cart);
 
         $this->updateOrder($products);
