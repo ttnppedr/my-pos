@@ -13,16 +13,18 @@
                             href="{{route('new-order')}}">新增</a>
                     </button>
                 </li>
-                <li>
-                    <button
-                        class="bg-[#0f375b] text-white h-[50px] w-[50px] rounded mr-4 flex justify-center items-center">
-                        <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M16.763 16.763a1.364 1.364 0 0 1 1.929 0l8.58 8.581v-4.89a1.364 1.364 0 0 1 2.728 0v8.182c0 .753-.61 1.363-1.364 1.363L20.455 30a1.364 1.364 0 0 1 0-2.727h4.89l-8.582-8.582a1.364 1.364 0 0 1 0-1.928zm-5.454 0a1.364 1.364 0 1 1 1.928 1.929l-8.581 8.58h4.89a1.364 1.364 0 0 1 0 2.728H1.363c-.753 0-1.363-.61-1.363-1.364L0 20.455a1.364 1.364 0 0 1 2.727 0v4.89zM9.545 0a1.364 1.364 0 0 1 0 2.727h-4.89l8.582 8.582a1.364 1.364 0 1 1-1.929 1.928l-8.58-8.581v4.89a1.364 1.364 0 0 1-2.728 0V1.363C0 .611.61.001 1.364.001zm19.09 0C29.39 0 30 .61 30 1.364L30 9.545a1.364 1.364 0 0 1-2.727 0v-4.89l-8.582 8.582a1.36 1.36 0 0 1-1.928 0 1.364 1.364 0 0 1 0-1.929l8.581-8.58h-4.89a1.364 1.364 0 0 1 0-2.728z"
-                                fill="#FFF" fill-rule="nonzero"/>
-                        </svg>
-                    </button>
-                </li>
+                {{--                <li>--}}
+                {{--                    <button--}}
+                {{--                        class="bg-[#0f375b] text-white h-[50px] w-[50px] rounded mr-4 flex justify-center items-center"--}}
+                {{--                                                onclick="openFullscreen()"--}}
+                {{--                    >--}}
+                {{--                        <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">--}}
+                {{--                            <path--}}
+                {{--                                d="M16.763 16.763a1.364 1.364 0 0 1 1.929 0l8.58 8.581v-4.89a1.364 1.364 0 0 1 2.728 0v8.182c0 .753-.61 1.363-1.364 1.363L20.455 30a1.364 1.364 0 0 1 0-2.727h4.89l-8.582-8.582a1.364 1.364 0 0 1 0-1.928zm-5.454 0a1.364 1.364 0 1 1 1.928 1.929l-8.581 8.58h4.89a1.364 1.364 0 0 1 0 2.728H1.363c-.753 0-1.363-.61-1.363-1.364L0 20.455a1.364 1.364 0 0 1 2.727 0v4.89zM9.545 0a1.364 1.364 0 0 1 0 2.727h-4.89l8.582 8.582a1.364 1.364 0 1 1-1.929 1.928l-8.58-8.581v4.89a1.364 1.364 0 0 1-2.728 0V1.363C0 .611.61.001 1.364.001zm19.09 0C29.39 0 30 .61 30 1.364L30 9.545a1.364 1.364 0 0 1-2.727 0v-4.89l-8.582 8.582a1.36 1.36 0 0 1-1.928 0 1.364 1.364 0 0 1 0-1.929l8.581-8.58h-4.89a1.364 1.364 0 0 1 0-2.728z"--}}
+                {{--                                fill="#FFF" fill-rule="nonzero"/>--}}
+                {{--                        </svg>--}}
+                {{--                    </button>--}}
+                {{--                </li>--}}
                 <li>
                     <button type="submit"
                             class="bg-[#0f375b] text-white h-[50px] w-[50px] rounded flex justify-center items-center"
@@ -41,4 +43,19 @@
     @if($showLogoutModal)
         <x-logout-modal></x-logout-modal>
     @endif
+    {{--    <script>--}}
+    {{--        const elem = document.getElementsByTagName("body")[0];--}}
+
+    {{--        function openFullscreen() {--}}
+    {{--            if (elem.requestFullscreen) {--}}
+    {{--                elem.requestFullscreen();--}}
+    {{--            } else if (elem.mozRequestFullScreen) {--}}
+    {{--                elem.mozRequestFullScreen();--}}
+    {{--            } else if (elem.webkitRequestFullScreen) {--}}
+    {{--                elem.webkitRequestFullScreen();--}}
+    {{--            } else if (elem.msRequestFullscreen) {--}}
+    {{--                elem.msRequestFullscreen();--}}
+    {{--            }--}}
+    {{--        }--}}
+    {{--    </script>--}}
 </div>
