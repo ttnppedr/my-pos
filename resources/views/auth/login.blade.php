@@ -13,12 +13,12 @@
             @csrf
 
             <div class="mb-[25px]">
-                <x-jet-label for="email" class="text-2xl" required value="帳號"/>
-                <x-jet-input id="email"
+                <x-jet-label for="mobile" class="text-2xl" required value="帳號"/>
+                <x-jet-input id="mobile"
                              class="h-[50px] block mt-1 w-full bg-[#f8f8f8] border-[#d8d8d8] text-xl px-[16px] py-[12px]"
-                             type="email"
-                             name="email"
-                             :value="old('email')"
+                             type="text"
+                             name="mobile"
+                             :value="old('mobile')"
                              required autofocus/>
             </div>
 
