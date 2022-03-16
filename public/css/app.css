@@ -1340,6 +1340,9 @@ select {
 .justify-around {
   justify-content: space-around;
 }
+.justify-items-center {
+  justify-items: center;
+}
 .gap-6 {
   gap: 1.5rem;
 }
