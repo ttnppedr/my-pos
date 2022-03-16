@@ -6,11 +6,9 @@ environments:
         storage: my-pos-prod-storage
         queues: false
         scheduler: false
-        cli-concurrency: 5
-        cli-memory: 256
+        cli-memory: 128
         cli-timeout: 60
-        concurrency: 10
-        memory: 256
+        memory: 128
         timeout: 30
         runtime: docker
         gateway-version: 2
