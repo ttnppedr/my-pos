@@ -1,0 +1,22 @@
+id: 29273
+name: my-pos
+environments:
+    production:
+        domain: my-pos.tw
+        storage: my-pos-prod-storage
+        queues: false
+        scheduler: false
+        cli-concurrency: 5
+        cli-memory: 256
+        cli-timeout: 60
+        concurrency: 10
+        memory: 256
+        timeout: 30
+        runtime: docker
+        gateway-version: 2
+        build:
+            - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
+            - 'php artisan event:cache'
+            - 'npm ci && npm run prod && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force --seed'

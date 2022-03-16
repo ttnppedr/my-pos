@@ -1,0 +1,59 @@
+id: 28667
+name: gengar-api
+environments:
+  production:
+    domain: api.rc-wallets.com
+    storage: gengar-api-prod-storage
+    queue-concurrency: 10
+    queue-memory: 512
+    queue-timeout: 30
+    cli-concurrency: 5
+    cli-memory: 512
+    cli-timeout: 60
+    concurrency: 10
+    memory: 512
+    timeout: 30
+    runtime: docker
+    gateway-version: 2
+    subnets:
+      - subnet-0d2a390b41357b53d
+      - subnet-067537c821cd3c338
+    security-groups:
+      - sg-008e99d72be59a2a0
+    build:
+      - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --optimize-autoloader --no-dev'
+    #      - 'php artisan optimize'
+    deploy:
+      - 'php artisan migrate --force --seed'
+    queues:
+      - gengar-api-prod-queue-low
+      - gengar-api-prod-queue-medium
+      - gengar-api-prod-queue-high
+  dev:
+    domain: api.d-rc-wallets.com
+    storage: gengar-api-dev-storage
+    queue-concurrency: 10
+    queue-memory: 512
+    queue-timeout: 30
+    cli-concurrency: 5
+    cli-memory: 512
+    cli-timeout: 60
+    concurrency: 10
+    memory: 512
+    timeout: 30
+    runtime: docker
+    gateway-version: 2
+    subnets:
+      - subnet-0d2a390b41357b53d
+      - subnet-067537c821cd3c338
+    security-groups:
+      - sg-9aa9ade2
+    build:
+      - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --optimize-autoloader --no-dev'
+#      - 'php artisan optimize'
+    deploy:
+      - 'php artisan migrate --force --seed'
+    queues:
+      - gengar-api-dev-queue-low
+      - gengar-api-dev-queue-medium
+      - gengar-api-dev-queue-high
