@@ -12,4 +12,11 @@ class Header extends Component
     {
         return view('livewire.header');
     }
+
+    public function logout()
+    {
+        auth('web')->logout();
+
+        return redirect()->route('dashboard');
+    }
 }

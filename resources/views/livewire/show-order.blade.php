@@ -103,7 +103,7 @@
                         <x-disablable-button type="danger" disabled>刪 除</x-disablable-button>
                         <x-disablable-button type="normal" disabled>結 帳</x-disablable-button>
                     @else
-                        <x-disablable-button type="primary" css="col-span-2" wire:click="$set('isEditing',true)">修 改
+                        <x-disablable-button type="primary" class="col-span-2" wire:click="$set('isEditing',true)">修 改
                         </x-disablable-button>
                         <x-disablable-button type="danger" wire:click="$set('showDeleteOrderModal', true)">刪 除
                         </x-disablable-button>

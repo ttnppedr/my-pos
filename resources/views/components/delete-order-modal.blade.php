@@ -30,15 +30,13 @@
                 <!-- Buttons -->
                 <div class="mt-4 flex space-x-2 justify-center">
                     <x-disablable-button type="outline"
-                                         class="flex flex-1"
                                          css="border-[#a71f23]"
                                          spanCss="text-[#a71f23]"
                                          wire:click="$set('showDeleteOrderModal',false)"
                     >取 消
                     </x-disablable-button>
                     <x-disablable-button type="primary"
-                                         class="flex flex-1"
-                                         css="bg-[#a71f23]"
+                                         class="bg-[#a71f23]"
                                          wire:click="deleteOrder"
                     >確 認
                     </x-disablable-button>

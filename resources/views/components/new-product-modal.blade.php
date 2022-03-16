@@ -36,15 +36,11 @@
                 </div>
                 <!-- Buttons -->
                 <div class="mt-4 flex space-x-2 justify-center">
-                    <x-disablable-button type="outline"
-                                         class="flex flex-1"
-                                         wire:click="$set('showNewProductModal',false)"
-                    >取 消
+                    <x-disablable-button type="outline" wire:click="$set('showNewProductModal',false)">
+                        取 消
                     </x-disablable-button>
-                    <x-disablable-button type="primary"
-                                         class="flex flex-1"
-                                         wire:click="addNewToCart"
-                    >確 認
+                    <x-disablable-button type="primary" wire:click="addNewToCart">
+                        確 認
                     </x-disablable-button>
                 </div>
             </div>

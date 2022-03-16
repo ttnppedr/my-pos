@@ -29,18 +29,12 @@
                 </div>
                 <!-- Buttons -->
                 <div class="mt-4 flex space-x-2 justify-center">
-                    <x-disablable-button type="outline"
-                                         class="flex flex-1 px-0"
-                                         wire:click="$set('showLogoutModal',false)"
-                    >取 消
+                    <x-disablable-button type="outline" wire:click="$set('showLogoutModal',false)">
+                        取 消
                     </x-disablable-button>
-                    <form class="flex flex-1" method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <x-disablable-button type="primary"
-                                             class="flex flex-1"
-                        >確 認
-                        </x-disablable-button>
-                    </form>
+                    <x-disablable-button type="primary" wire:click="logout">
+                        確 認
+                    </x-disablable-button>
                 </div>
             </div>
         </div>
