@@ -8,7 +8,7 @@ environments:
         scheduler: false
         cli-memory: 128
         cli-timeout: 60
-        memory: 128
+        memory: 512
         timeout: 30
         runtime: docker
         gateway-version: 2
