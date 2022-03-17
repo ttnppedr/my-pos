@@ -2,7 +2,7 @@
 name: Bug report
 about: 問題回報
 title: "[BUG]"
-labels: ''
+labels: bug
 assignees: ttnppedr
 
 ---
