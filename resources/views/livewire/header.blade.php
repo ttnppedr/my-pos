@@ -5,7 +5,7 @@
             <ul class="flex text-2xl">
                 <li>
                     <button class="bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4"><a
-                            href="{{route('orders')}}}">訂單</a>
+                            href="{{route('orders')}}">訂單</a>
                     </button>
                 </li>
                 <li>
