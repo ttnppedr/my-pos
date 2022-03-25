@@ -4,14 +4,16 @@
         <nav>
             <ul class="flex text-2xl">
                 <li>
-                    <button class="bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4"><a
-                            href="{{route('orders')}}">訂單</a>
-                    </button>
+                    <a
+                        class="flex flex-1 justify-center items-center bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4"
+                        href="{{route('orders')}}"
+                    >訂單</a>
                 </li>
                 <li>
-                    <button class="bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4"><a
-                            href="{{route('new-order')}}">新增</a>
-                    </button>
+                    <a
+                        class="flex flex-1 justify-center items-center bg-[#0f375b] text-white h-[50px] w-[80px] rounded mr-4"
+                        href="{{route('new-order')}}"
+                    >新增</a>
                 </li>
                 {{--                <li>--}}
                 {{--                    <button--}}

@@ -1,27 +1,28 @@
 @section('title', '訂單明細')
-<div>
-    <div class="flex font-bold">
-        <div class="w-2/3">
+<div x-data="cartApp">
+    <div x-data="{carts: @entangle('carts').defer, isEditing: false}" class="flex font-bold">
+        <div x-data="{products: @js($products)}" class="w-2/3">
             <div class="bg-[#f8f8f8] h-screen overflow-y-auto h-[calc(100vh_-_80px)] overflow-x-hidden">
                 <div class="py-4 px-6 grid grid-cols-2 gap-x-4 gap-y-6 text-[#0f375b]">
-                    <div class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer"
-                         wire:click="$set('showNewProductModal',true)"
+                    <div
+                        @click="showNewProductModal = true"
+                        class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer"
                     >
                         <div class=" text-2xl text-center">
                             <span>其他品項</span>
                         </div>
                     </div>
-                    @foreach($products as $product)
-                        <div
+                    <template x-for="product in products">
+                        <button
                             class="bg-white px-4 py-5 border border-[#e5e5e5] rounded {{ $this->isEditing ? 'cursor-pointer' : '' }}"
-                            wire:click="addToCartFromProductList({{$product->id}})"
+                            @click="addFromProductList(product)"
                         >
                             <div class="flex justify-between text-2xl">
-                                <span>{{$product->name}}</span>
-                                <span>${{number_format($product->price, 0, '', ',')}}</span>
+                                <span x-text="product.name"></span>
+                                <span x-text="'$'+new Intl.NumberFormat().format(product.price)"></span>
                             </div>
-                        </div>
-                    @endforeach
+                        </button>
+                    </template>
                 </div>
             </div>
         </div>
@@ -114,9 +115,7 @@
             </div>
         </div>
     </div>
-    @if($showNewProductModal)
-        <x-new-product-modal></x-new-product-modal>
-    @endif
+    <x-new-product-modal></x-new-product-modal>
     @if($showDeleteOrderModal)
         <x-delete-order-modal></x-delete-order-modal>
     @endif
