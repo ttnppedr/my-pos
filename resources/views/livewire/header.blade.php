@@ -1,4 +1,4 @@
-<div>
+<div x-data="{showLogoutModal: false}">
     <div class="shadow-[0_1px_4px_1px_#e5e5e5] h-[80px] flex justify-between py-[15px] px-[25px] ">
         <h1 class="text-3xl my-[4px]">@yield('title')</h1>
         <nav>
@@ -28,7 +28,7 @@
                 <li>
                     <button type="submit"
                             class="bg-[#0f375b] text-white h-[50px] w-[50px] rounded flex justify-center items-center"
-                            wire:click="$set('showLogoutModal',true)"
+                            @click="showLogoutModal = true"
                     >
                         <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -40,9 +40,7 @@
             </ul>
         </nav>
     </div>
-    @if($showLogoutModal)
-        <x-logout-modal></x-logout-modal>
-    @endif
+    <x-logout-modal></x-logout-modal>
     {{--    <script>--}}
     {{--        const elem = document.getElementsByTagName("body")[0];--}}
 
