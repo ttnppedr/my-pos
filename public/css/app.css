@@ -1500,13 +1500,13 @@ select {
   --tw-border-opacity: 1;
   border-color: rgb(229 229 229 / var(--tw-border-opacity));
 }
-.border-\[\#a71f23\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(167 31 35 / var(--tw-border-opacity));
-}
 .border-\[\#0f375b\] {
   --tw-border-opacity: 1;
   border-color: rgb(15 55 91 / var(--tw-border-opacity));
+}
+.border-\[\#a71f23\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(167 31 35 / var(--tw-border-opacity));
 }
 .border-teal-400 {
   --tw-border-opacity: 1;
@@ -1600,13 +1600,13 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(216 243 230 / var(--tw-bg-opacity));
 }
-.bg-\[\#a71f23\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(167 31 35 / var(--tw-bg-opacity));
-}
 .bg-\[\#e5e5e5\] {
   --tw-bg-opacity: 1;
   background-color: rgb(229 229 229 / var(--tw-bg-opacity));
+}
+.bg-\[\#a71f23\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(167 31 35 / var(--tw-bg-opacity));
 }
 .bg-\[\#006941\] {
   --tw-bg-opacity: 1;
@@ -1739,6 +1739,10 @@ select {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
 .px-\[50px\] {
   padding-left: 50px;
   padding-right: 50px;
@@ -1746,10 +1750,6 @@ select {
 .py-\[75px\] {
   padding-top: 75px;
   padding-bottom: 75px;
-}
-.px-16 {
-  padding-left: 4rem;
-  padding-right: 4rem;
 }
 .pt-6 {
   padding-top: 1.5rem;

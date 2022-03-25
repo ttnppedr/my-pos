@@ -1,4 +1,4 @@
-@if($attributes->has('disabled'))
+@if($attributes->has('disabled') && $attributes['disabled'])
     <button
         {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 bg-[#e5e5e5] rounded w-full']) }}
     ><span

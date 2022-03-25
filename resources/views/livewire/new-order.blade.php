@@ -1,19 +1,21 @@
 @section('title', '新增訂單')
 <div x-data="cartApp">
-    <div class="flex font-bold">
-        <div class="w-2/3" x-data="{products: @js($products)}">
+    <div x-data="{carts: @entangle('carts').defer}" class="flex font-bold">
+        <div x-data="{products: @js($products)}" class="w-2/3">
             <div class="bg-[#f8f8f8] h-screen overflow-y-auto h-[calc(100vh_-_80px)] overflow-x-hidden">
                 <div class="py-4 px-6 grid grid-cols-2 gap-x-4 gap-y-6 text-[#0f375b]">
-                    <div class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer"
-                         wire:click="$set('showNewProductModal',true)"
+                    <div
+                        @click="showNewProductModal = true"
+                        class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer"
                     >
                         <div class=" text-2xl text-center">
                             <span>其他品項</span>
                         </div>
                     </div>
                     <template x-for="product in products">
-                        <div class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer"
-                             @click="addFromProductList(product)"
+                        <div
+                            @click="addFromProductList(product)"
+                            class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer"
                         >
                             <div class="flex justify-between text-2xl">
                                 <span x-text="product.name"></span>
@@ -28,8 +30,9 @@
             <div class="flex p-4 text-2xl items-center justify-between border-b">
                 <span class="mr-4">桌號</span>
                 <input
-                    wire:model="note"
-                    type="text" class="flex-1 w-full rounded bg-[#f8f8f8] border border-[#e5e5e5]">
+                    wire:model.defer="note"
+                    type="text" class="flex-1 w-full rounded bg-[#f8f8f8] border border-[#e5e5e5]"
+                >
             </div>
             <div class="overflow-y-auto h-[calc(100vh_-_365px)] overflow-x-hidden">
                 <template x-for="cart in carts" :key="`${cart.name}-${cart.price}`">
@@ -40,8 +43,9 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <div class="flex justify-around items-center">
-                                <button class="flex justify-center items-center bg-[#fce2e2] rounded w-[44px] h-[44px]"
-                                        @click="cartMinus(cart)"
+                                <button
+                                    @click="cartMinus(cart)"
+                                    class="flex justify-center items-center bg-[#fce2e2] rounded w-[44px] h-[44px]"
                                 >
                                     <svg width="22" height="4" viewBox="0 0 22 4" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -50,14 +54,16 @@
                                     </svg>
                                 </button>
                                 <div class="px-3">
-                                    <input type="text"
-                                           disabled
-                                           class="w-32 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-center font-semibold text-xl"
-                                           x-model="cart.quantity"
+                                    <input
+                                        x-model="cart.quantity"
+                                        disabled
+                                        class="w-32 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-center font-semibold text-xl"
+                                        type="text"
                                     >
                                 </div>
-                                <button class="flex justify-center items-center bg-[#d8f3e6] rounded w-[44px] h-[44px]"
-                                        @click="cartPlus(cart)"
+                                <button
+                                    @click="cartPlus(cart)"
+                                    class="flex justify-center items-center bg-[#d8f3e6] rounded w-[44px] h-[44px]"
                                 >
                                     <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -67,8 +73,9 @@
                                 </button>
                             </div>
                             <div class="flex items-center">
-                                <button class="flex justify-center items-center bg-[#fce2e2] rounded w-[44px] h-[44px]"
-                                        @click="cartRemove(cart)"
+                                <button
+                                    @click="cartRemove(cart)"
+                                    class="flex justify-center items-center bg-[#fce2e2] rounded w-[44px] h-[44px]"
                                 >
                                     <svg width="22" height="25" viewBox="0 0 22 25" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -87,20 +94,33 @@
                     <span x-text="'$'+new Intl.NumberFormat().format(totalPrice)"></span>
                 </div>
                 <div class="grid grid-cols-2 gap-3 px-3 py-4">
-                    @if($this->isCartEmpty())
-                        <x-disablable-button type="outline" wire:click="clearCart" disabled>取 消</x-disablable-button>
-                        <x-disablable-button type="primary" wire:click="save" disabled>儲 存</x-disablable-button>
-                    @else
-                        <x-disablable-button type="outline" wire:click="clearCart">取 消</x-disablable-button>
-                        <x-disablable-button type="primary" wire:click="save">儲 存</x-disablable-button>
-                    @endif
+                    <button
+                        @click="clearCart"
+                        :disabled="isCartEmpty"
+                        :class="isCartEmpty ? 'bg-[#e5e5e5]' : 'bg-white border border-[#0f375b]'"
+                        class="flex flex-1 justify-center items-center px-16 py-2 w-full rounded"
+                    >
+                        <span
+                            :class="isCartEmpty ? 'text-[#8d8d8d]' : 'text-[#0f375b]'"
+                            class="font-bold text-xl"
+                        >取消</span>
+                    </button>
+                    <button
+                        wire:click="save"
+                        :disabled="isCartEmpty"
+                        :class="isCartEmpty ? 'bg-[#e5e5e5]' : 'bg-[#0f375b]'"
+                        class="flex flex-1 justify-center items-center px-16 py-2 w-full rounded"
+                    >
+                        <span
+                            :class="isCartEmpty ? 'text-[#8d8d8d]' : 'text-white'"
+                            class="font-bold text-xl"
+                        >儲存</span>
+                    </button>
                     <x-disablable-button type="danger" disabled>刪 除</x-disablable-button>
                     <x-disablable-button type="normal" disabled>結 帳</x-disablable-button>
                 </div>
             </div>
         </div>
     </div>
-    @if($showNewProductModal)
-        <x-new-product-modal></x-new-product-modal>
-    @endif
+    <x-new-product-modal></x-new-product-modal>
 </div>

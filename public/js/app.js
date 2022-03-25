@@ -5530,9 +5530,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
   return {
-    openNewItemModal: false,
-    newCartName: '',
-    newCartPrice: '',
+    showNewProductModal: false,
+    newProductName: null,
+    newProductPrice: null,
+    test: true,
     carts: [],
 
     get totalPrice() {
@@ -5541,21 +5542,34 @@ __webpack_require__.r(__webpack_exports__);
       }, 0);
     },
 
-    addCart: function addCart() {
-      if (!this.newCartName || !this.newCartPrice) {
-        this.openNewItemModal = false;
+    get canAddNewToCart() {
+      return this.newProductName && this.newProductPrice;
+    },
+
+    get isCartEmpty() {
+      return this.carts.length === 0;
+    },
+
+    addNewToCart: function addNewToCart() {
+      var _this = this;
+
+      var item = this.carts.find(function (cart) {
+        return cart.name === _this.newProductName && cart.price === +_this.newProductPrice;
+      });
+
+      if (item) {
+        item.quantity++;
+        this.closeNewProductModal();
         return;
       }
 
       this.carts.push({
         id: null,
-        name: this.newCartName,
-        price: this.newCartPrice,
+        name: this.newProductName,
+        price: this.newProductPrice,
         quantity: 1
       });
-      this.openNewItemModal = false;
-      this.newCartName = '';
-      this.newCartPrice = '';
+      this.closeNewProductModal();
     },
     addFromProductList: function addFromProductList(product) {
       var item = this.carts.find(function (cart) {
@@ -5563,7 +5577,9 @@ __webpack_require__.r(__webpack_exports__);
       });
 
       if (item) {
-        return item.quantity++;
+        this.closeNewProductModal();
+        item.quantity++;
+        return;
       }
 
       this.carts.push({
@@ -5586,6 +5602,14 @@ __webpack_require__.r(__webpack_exports__);
       this.carts = this.carts.filter(function (candidate) {
         return candidate !== cart;
       });
+    },
+    closeNewProductModal: function closeNewProductModal() {
+      this.showNewProductModal = false;
+      this.newProductName = null;
+      this.newProductPrice = null;
+    },
+    clearCart: function clearCart() {
+      this.carts = [];
     }
   };
 });
