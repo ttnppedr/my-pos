@@ -1,6 +1,6 @@
 @section('title', '訂單列表')
 <div>
-    <div class="bg-[#f8f8f8] h-screen">
+    <div class="bg-[#f8f8f8] h-full">
         <div class="py-4 px-6 grid grid-cols-3 gap-x-4 gap-y-6">
             @foreach($orders as $order)
                 <button
