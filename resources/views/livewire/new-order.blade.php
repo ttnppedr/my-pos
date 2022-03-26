@@ -34,7 +34,7 @@
                     type="text" class="flex-1 w-full rounded bg-[#f8f8f8] border border-[#e5e5e5]"
                 >
             </div>
-            <div class="overflow-y-auto h-[calc(100vh_-_365px)] overflow-x-hidden">
+            <div class="overflow-y-auto h-[calc(100vh_-_370px)] overflow-x-hidden">
                 <template x-for="cart in carts" :key="`${cart.name}-${cart.price}`">
                     <div class="mx-4 mt-3 px-3 py-4 border border-[#e5e5e5] rounded cursor-pointer">
                         <div class="flex justify-between text-[#0f375b] text-xl pb-2">
@@ -121,6 +121,6 @@
                 </div>
             </div>
         </div>
+        <x-new-product-modal></x-new-product-modal>
     </div>
-    <x-new-product-modal></x-new-product-modal>
 </div>

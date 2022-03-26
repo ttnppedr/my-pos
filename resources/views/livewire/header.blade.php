@@ -1,4 +1,4 @@
-<div x-data="{showLogoutModal: false}">
+<div x-data="{showLogoutModal: false}" x-cloak>
     <div class="shadow-[0_1px_4px_1px_#e5e5e5] h-[80px] flex justify-between py-[15px] px-[25px] ">
         <h1 class="text-3xl my-[4px]">@yield('title')</h1>
         <nav>

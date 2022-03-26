@@ -1,4 +1,4 @@
-<div>
+<div x-show="showCheckoutModal" x-cloak x-data="{amountReceived: @entangle('amountReceived').defer}">
     <div class="fixed inset-0 overflow-y-auto">
         <div x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
         <div
@@ -12,7 +12,7 @@
             >
                 <div class="flex justify-between mb-6">
                     <span class="text-2xl">結帳</span>
-                    <button wire:click="$set('showCheckoutModal',false)"
+                    <button @click="showCheckoutModal = false"
                     >
                         <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -25,24 +25,38 @@
                 <div class="flex flex-col items-center">
                     <div class="w-full mb-4">
                         <div class="text-lg"><span>應收金額</span></div>
-                        <input type="text" value="{{number_format($amountReceivable, 0, '', ',')}}"
-                               disabled
-                               class="w-full h-10 px-4 py-2 flex-1 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-xl text-[#8d8d8d]">
+                        <input
+                            x-model="new Intl.NumberFormat().format(totalPrice)"
+                            disabled
+                            class="w-full h-10 px-4 py-2 flex-1 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-xl text-[#8d8d8d]"
+                            type="text"
+                        >
                     </div>
                     <div class="w-full mb-4">
                         <div class="text-lg"><span class="text-red-700">*</span><span>實收金額</span></div>
-                        <input type="text" wire:model="amountReceived"
-                               class="w-full h-10 px-4 py-2 flex-1 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-xl">
+                        <input
+                            x-model="amountReceived"
+                            class="w-full h-10 px-4 py-2 flex-1 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-xl"
+                            type="number"
+                        >
                     </div>
                 </div>
                 <!-- Buttons -->
                 <div class="mt-4 flex space-x-2 justify-center">
-                    <x-disablable-button type="outline" wire:click="$set('showCheckoutModal',false)">
+                    <x-disablable-button type="outline" @click="showCheckoutModal = false">
                         取 消
                     </x-disablable-button>
-                    <x-disablable-button type="primary" wire:click="checkout">
-                        確 認
-                    </x-disablable-button>
+                    <button
+                        wire:click="checkout"
+                        :disabled="!amountReceived && amountReceived <= 0"
+                        :class="!amountReceived && amountReceived <= 0 ? 'bg-[#e5e5e5]' : 'bg-[#0f375b]'"
+                        class="flex flex-1 justify-center items-center px-16 py-2 w-full rounded"
+                    >
+                        <span
+                            :class="!amountReceived && amountReceived <= 0 ? 'text-[#8d8d8d]' : 'text-white'"
+                            class="font-bold text-xl"
+                        >確認</span>
+                    </button>
                 </div>
             </div>
         </div>

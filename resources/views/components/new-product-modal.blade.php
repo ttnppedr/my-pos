@@ -1,4 +1,4 @@
-<div x-show="showNewProductModal">
+<div x-show="showNewProductModal" x-cloak>
     <div class="fixed inset-0 overflow-y-auto">
         <div x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
         <div
@@ -44,6 +44,7 @@
                         取 消
                     </x-disablable-button>
                     <button
+                        @click="addNewToCart"
                         :disabled="!canAddNewToCart"
                         :class="canAddNewToCart ? 'bg-[#0f375b]' : 'bg-[#e5e5e5]'"
                         class="flex flex-1 justify-center items-center px-16 py-2 w-full rounded"

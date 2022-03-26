@@ -1,4 +1,4 @@
-<div x-show="showLogoutModal">
+<div x-show="showLogoutModal" x-cloak>
     <div class="fixed inset-0 overflow-y-auto">
         <div x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
         <div

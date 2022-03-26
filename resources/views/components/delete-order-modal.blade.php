@@ -1,4 +1,4 @@
-<div>
+<div x-show="showDeleteOrderModal" x-cloak>
     <div class="fixed inset-0 overflow-y-auto">
         <div x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
         <div
@@ -12,7 +12,7 @@
             >
                 <div class="flex justify-between mb-6">
                     <span class="text-2xl">刪除訂單</span>
-                    <button wire:click="$set('showDeleteOrderModal',false)"
+                    <button @click="showDeleteOrderModal = false"
                     >
                         <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -29,15 +29,17 @@
                 </div>
                 <!-- Buttons -->
                 <div class="mt-4 flex space-x-2 justify-center">
-                    <x-disablable-button type="outline"
-                                         css="border-[#a71f23]"
-                                         spanCss="text-[#a71f23]"
-                                         wire:click="$set('showDeleteOrderModal',false)"
+                    <x-disablable-button
+                        @click="showDeleteOrderModal = false"
+                        css="border-[#a71f23]"
+                        spanCss="text-[#a71f23]"
+                        type="outline"
                     >取 消
                     </x-disablable-button>
-                    <x-disablable-button type="primary"
-                                         class="bg-[#a71f23]"
-                                         wire:click="deleteOrder"
+                    <x-disablable-button
+                        wire:click="deleteOrder"
+                        class="bg-[#a71f23]"
+                        type="primary"
                     >確 認
                     </x-disablable-button>
                 </div>
