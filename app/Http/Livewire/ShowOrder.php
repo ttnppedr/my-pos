@@ -10,21 +10,19 @@ use Livewire\Component;
 class ShowOrder extends Component
 {
     public $order;
-    public $cart;
+    public $carts;
+    public $orderCarts;
 
-    public $showNewProductModal = false;
-    public $showDeleteOrderModal = false;
-    public $showCheckoutModal = false;
     public $note;
     public $newProductName;
     public $newProductPrice;
-    public $isEditing;
     public $amountReceived;
 
     public function mount(Order $order)
     {
         $this->order = $order;
-        $this->cart = collect($order->products)->toArray();
+        $this->orderCarts = $order->products->toArray();
+        $this->carts = [];
         $this->note = $order->note;
     }
 
@@ -32,80 +30,18 @@ class ShowOrder extends Component
     {
         return view('livewire.show-order', [
             'products' => Product::all(),
+            'orderCarts' => $this->orderCarts,
+            'carts' => $this->carts,
             'amountReceivable' => $this->calculateAmountReceivable(),
         ]);
     }
 
     public function calculateAmountReceivable()
     {
-        return array_reduce($this->cart, function ($sum, $product) {
+        return array_reduce($this->carts, function ($sum, $product) {
             $sum += $product['price'] * $product['quantity'];
             return $sum;
         }, 0);
-    }
-
-    public function addToCartFromProductList($productId)
-    {
-        if (!$this->isEditing) {
-            return;
-        }
-
-        $cart = collect($this->cart);
-        $product = Product::select(['id', 'name', 'price'])->find($productId)->toArray();
-
-        if ($cart->where('name', $product['name'])->where('price', $product['price'])->count() > 0) {
-            $this->cart = $cart->map(function ($item) use ($product) {
-                if ($item['name'] === $product['name'] && $item['price'] === $product['price']) {
-                    $item['id'] = $product['id'];
-                    $item['quantity']++;
-                }
-                return $item;
-            })->toArray();
-            return;
-        }
-
-        $this->cart[] = $product + ['quantity' => 1];
-    }
-
-    public function addNewToCart()
-    {
-        if (!$this->isEditing) {
-            return;
-        }
-
-        $cart = collect($this->cart);
-
-        if ($cart->where('name', $this->newProductName)->where('price', $this->newProductPrice)->count() > 0) {
-            $this->cart = $cart->map(function ($item) {
-                if ($item['name'] === $this->newProductName && $item['price'] === (int) $this->newProductPrice) {
-                    $item['quantity']++;
-                }
-                return $item;
-            })->toArray();
-            $this->resetNewProduct();
-            $this->closeNewProductModal();
-            return;
-        }
-
-        $this->cart[] = [
-            'name' => $this->newProductName,
-            'price' => (int) $this->newProductPrice,
-            'quantity' => 1,
-        ];
-
-        $this->resetNewProduct();
-        $this->closeNewProductModal();
-    }
-
-    public function resetNewProduct()
-    {
-        $this->newProductName = '';
-        $this->newProductPrice = '';
-    }
-
-    public function closeNewProductModal()
-    {
-        $this->showNewProductModal = false;
     }
 
     public function deleteOrder()
@@ -115,43 +51,16 @@ class ShowOrder extends Component
         return redirect()->route('orders');
     }
 
-    public function cartPlus($index)
-    {
-        $this->cart[$index]['quantity']++;
-    }
-
-    public function cartMinus($index)
-    {
-        if ($this->cart[$index]['quantity'] - 1 === 0) {
-            unset($this->cart[$index]);
-            return;
-        }
-
-        $this->cart[$index]['quantity']--;
-    }
-
-    public function cartItemDelete($index)
-    {
-        unset($this->cart[$index]);
-    }
-
-    public function cancelEditing()
-    {
-        $this->cart = collect($this->order->products)->toArray();
-        $this->isEditing = false;
-    }
-
     public function save()
     {
-        $products = array_map(function ($product) {
-            if (isset($product['order_id'])) {
-                return array_merge($product, ['product_id' => $product['product_id'] ?? null]);
-            } else {
-                return array_merge($product, ['product_id' => $product['id'] ?? null]);
-            }
-        }, $this->cart);
+        $products = array_map(function ($cart) {
+            $productId = isset($cart['order_id']) ? $cart['product_id'] ?? null : $cart['id'] ?? null;
+            return array_merge($cart, ['product_id' => $productId]);
+        }, $this->carts);
 
         $this->updateOrder($products);
+
+        return redirect()->route('show-order', ['order' => $this->order]);
     }
 
     public function updateOrder($products)
@@ -168,8 +77,6 @@ class ShowOrder extends Component
             }
             $this->order->update(['note' => $this->note]);
         });
-
-        $this->isEditing = false;
     }
 
     public function checkout()

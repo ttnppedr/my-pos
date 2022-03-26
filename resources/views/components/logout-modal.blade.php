@@ -1,4 +1,4 @@
-<div>
+<div x-show="showLogoutModal" x-cloak>
     <div class="fixed inset-0 overflow-y-auto">
         <div x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
         <div
@@ -12,7 +12,7 @@
             >
                 <div class="flex justify-between mb-6">
                     <span class="text-2xl">登出</span>
-                    <button wire:click="$set('showLogoutModal',false)"
+                    <button @click="showLogoutModal = false"
                     >
                         <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -29,12 +29,8 @@
                 </div>
                 <!-- Buttons -->
                 <div class="mt-4 flex space-x-2 justify-center">
-                    <x-disablable-button type="outline" wire:click="$set('showLogoutModal',false)">
-                        取 消
-                    </x-disablable-button>
-                    <x-disablable-button type="primary" wire:click="logout">
-                        確 認
-                    </x-disablable-button>
+                    <x-disablable-button type="outline" @click="showLogoutModal = false">取 消</x-disablable-button>
+                    <x-disablable-button type="primary" wire:click="logout">確 認</x-disablable-button>
                 </div>
             </div>
         </div>

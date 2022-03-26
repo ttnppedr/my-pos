@@ -1,51 +1,79 @@
-export default () =>  ( {
-        openNewItemModal: false,
-        newCartName: '',
-        newCartPrice: '',
-        carts: [],
+export default () => ({
+    showNewProductModal: false,
+    newProductName: null,
+    newProductPrice: null,
+    test: true,
+    carts: [],
 
-        addCart() {
-            if (!this.newCartName || !this.newCartPrice) {
-                this.openNewItemModal = false;
-                return;
-            }
+    get totalPrice() {
+        return this.carts.reduce((accumulator, cart) => {
+            return accumulator + cart.price * cart.quantity;
+        }, 0);
+    },
 
-            this.carts.push({
-                id: Date.now(),
-                name: this.newCartName,
-                price: this.newCartPrice,
-                amount: 1
-            });
+    get canAddNewToCart() {
+        return this.newProductName && this.newProductPrice;
+    },
 
-            this.openNewItemModal = false;
-            this.newCartName = '';
-            this.newCartPrice = '';
-        },
+    get isCartEmpty() {
+        return this.carts.length === 0;
+    },
 
-        addCartFromList(name, price, id) {
-            let items = this.carts.filter(cart => cart.name === name && cart.price === price);
-            if (items.length) {
-                return items[0].amount++;
-            }
-
-            this.carts.push({
-                id: id,
-                name: name,
-                price: price,
-                amount: 1
-            });
-        },
-
-        cartPlus(cart) {
-            cart.amount++;
-        },
-
-        cartMinus(cart) {
-            cart.amount--;
-
-            if (cart.amount === 0) {
-                let position = this.carts.indexOf(cart);
-                this.carts.splice(position, 1);
-            }
+    addNewToCart() {
+        let item = this.carts.find(cart => cart.name === this.newProductName && cart.price === +this.newProductPrice);
+        if (item) {
+            item.quantity++;
+            this.closeNewProductModal();
+            return;
         }
+
+        this.carts.push({
+            id: null,
+            name: this.newProductName,
+            price: this.newProductPrice,
+            quantity: 1
+        });
+
+        this.closeNewProductModal();
+    },
+
+    addFromProductList(product) {
+        let item = this.carts.find(cart => cart.name === product.name && cart.price === product.price);
+        if (item) {
+            this.closeNewProductModal();
+            item.quantity++;
+            return;
+        }
+
+        this.carts.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: 1
+        });
+    },
+
+    cartPlus(cart) {
+        cart.quantity++;
+    },
+
+    cartMinus(cart) {
+        cart.quantity--;
+
+        this.carts = this.carts.filter(cart => cart.quantity > 0);
+    },
+
+    cartRemove(cart) {
+        this.carts = this.carts.filter(candidate => candidate !== cart);
+    },
+
+    closeNewProductModal() {
+        this.showNewProductModal = false;
+        this.newProductName = null;
+        this.newProductPrice = null;
+    },
+
+    clearCart() {
+        this.carts = [];
+    }
 });

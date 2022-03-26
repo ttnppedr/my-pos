@@ -1,6 +1,6 @@
-@if($attributes->has('disabled'))
+@if($attributes->has('disabled') && $attributes['disabled'])
     <button
-        {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 bg-[#e5e5e5] rounded w-full']) }}
+        {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 bg-[#e5e5e5] rounded w-full border border-[#e5e5e5]']) }}
     ><span
             class="font-bold text-xl text-[#8d8d8d]">{{$slot}}</span>
     </button>
@@ -15,7 +15,7 @@
         @break
         @case('danger')
         <button
-            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#a71f23] rounded ' . ($css ?? '')]) }}
+            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#a71f23] rounded border border-[#a71f23] ' . ($css ?? '')]) }}
         ><span
                 class="font-bold text-xl {{$spanCss ?? 'text-white'}}">{{$slot}}</span>
         </button>
@@ -23,7 +23,7 @@
 
         @case('primary')
         <button
-            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#0f375b] rounded ' . ($css ?? '')]) }}
+            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#0f375b] rounded border border-[#0f375b]' . ($css ?? '')]) }}
         ><span
                 class="font-bold text-xl {{$spanCss ?? 'text-white'}}">{{$slot}}</span>
         </button>
@@ -31,10 +31,10 @@
 
         @case('normal')
         <button
-            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#006941] rounded ' . ($css ?? '')]) }}
+            {{ $attributes->merge(['class' => 'flex flex-1 justify-center items-center px-16 py-2 w-full bg-[#006941] rounded border border-[#006941]' . ($css ?? '')]) }}
         ><span
                 class="font-bold text-xl {{$spanCss ?? 'text-white'}}">{{$slot}}</span>
-        </button>
+            </buttonj>
         @break
     @endswitch
 @endif
