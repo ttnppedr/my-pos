@@ -3,8 +3,8 @@
     <div class="bg-[#f8f8f8] h-full">
         <div class="py-4 px-6 grid grid-cols-1 xl:grid-cols-3 gap-x-4 gap-y-6">
             @foreach($orders as $order)
-                <button
-                    wire:click="redirectTo({{$order->id}})"
+                <a
+                    href="{{route('show-order', $order->id)}}"
                 >
                     <div class="h-full bg-white p-4 font-bold border border-[#e5e5e5] rounded cursor-pointer"
                     >
@@ -27,7 +27,7 @@
                             {{$order->detail}}
                         </div>
                     </div>
-                </button>
+                </a>
             @endforeach
         </div>
     </div>
