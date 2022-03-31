@@ -50,7 +50,7 @@
                         wire:click="checkout"
                         :disabled="!amountReceived && amountReceived <= 0"
                         :class="!amountReceived && amountReceived <= 0 ? 'bg-[#e5e5e5]' : 'bg-[#0f375b]'"
-                        class="flex flex-1 justify-center items-center px-16 py-2 w-full rounded"
+                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 w-full rounded"
                     >
                         <span
                             :class="!amountReceived && amountReceived <= 0 ? 'text-[#8d8d8d]' : 'text-white'"

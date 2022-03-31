@@ -47,7 +47,7 @@
                         @click="addNewToCart"
                         :disabled="!canAddNewToCart"
                         :class="canAddNewToCart ? 'bg-[#0f375b]' : 'bg-[#e5e5e5]'"
-                        class="flex flex-1 justify-center items-center px-16 py-2 w-full rounded"
+                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 w-full rounded"
                     >
                         <span
                             :class="canAddNewToCart ? 'text-white' : 'text-[#8d8d8d]'"

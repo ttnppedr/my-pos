@@ -1,9 +1,9 @@
 @section('title', '新增訂單')
 <div x-data="cartApp">
     <div x-data="{carts: @entangle('carts').defer}" class="flex font-bold">
-        <div x-data="{products: @js($products)}" class="w-2/3">
+        <div x-data="{products: @js($products)}" class="w-1/2 md:w-2/3">
             <div class="bg-[#f8f8f8] h-screen overflow-y-auto h-[calc(100vh_-_80px)] overflow-x-hidden">
-                <div class="py-4 px-6 grid grid-cols-2 gap-x-4 gap-y-6 text-[#0f375b]">
+                <div class="py-4 px-6 grid md:grid-cols-2 gap-x-4 gap-y-6 text-[#0f375b]">
                     <div
                         @click="showNewProductModal = true"
                         class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer"
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-1/3 flex flex-col">
+        <div class="w-1/2 md:w-1/3 flex flex-col">
             <div class="flex p-4 text-2xl items-center justify-between border-b">
                 <span class="mr-4">桌號</span>
                 <input
@@ -37,7 +37,7 @@
             <div class="overflow-y-auto h-[calc(100vh_-_370px)] overflow-x-hidden">
                 <template x-for="cart in carts" :key="`${cart.name}-${cart.price}`">
                     <div class="mx-4 mt-3 px-3 py-4 border border-[#e5e5e5] rounded cursor-pointer">
-                        <div class="flex justify-between text-[#0f375b] text-xl pb-2">
+                        <div class="flex justify-between text-[#0f375b] text-md md:text-xl pb-2">
                             <span x-text="cart.name"></span>
                             <span x-text="'*'+cart.quantity+' / $'+new Intl.NumberFormat().format(cart.price)"></span>
                         </div>
@@ -57,7 +57,7 @@
                                     <input
                                         x-model="cart.quantity"
                                         disabled
-                                        class="w-32 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-center font-semibold text-xl"
+                                        class="w-14 lg:w-32 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-center font-semibold text-xl"
                                         type="text"
                                     >
                                 </div>
@@ -98,7 +98,7 @@
                         @click="clearCart"
                         :disabled="isCartEmpty"
                         :class="isCartEmpty ? 'bg-[#e5e5e5]' : 'bg-white border border-[#0f375b]'"
-                        class="flex flex-1 justify-center items-center px-16 py-2 w-full rounded"
+                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 w-full rounded"
                     >
                         <span
                             :class="isCartEmpty ? 'text-[#8d8d8d]' : 'text-[#0f375b]'"
@@ -109,15 +109,15 @@
                         wire:click="save"
                         :disabled="isCartEmpty"
                         :class="isCartEmpty ? 'bg-[#e5e5e5]' : 'bg-[#0f375b]'"
-                        class="flex flex-1 justify-center items-center px-16 py-2 w-full rounded"
+                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 w-full rounded"
                     >
                         <span
                             :class="isCartEmpty ? 'text-[#8d8d8d]' : 'text-white'"
                             class="font-bold text-xl"
                         >儲存</span>
                     </button>
-                    <x-disablable-button type="danger" disabled>刪 除</x-disablable-button>
-                    <x-disablable-button type="normal" disabled>結 帳</x-disablable-button>
+                    <x-disablable-button type="danger" disabled>刪除</x-disablable-button>
+                    <x-disablable-button type="normal" disabled>結帳</x-disablable-button>
                 </div>
             </div>
         </div>

@@ -16,9 +16,9 @@
         x-init="$nextTick(() => {carts = JSON.parse(JSON.stringify(orderCarts))})"
         class="flex font-bold"
     >
-        <div x-data="{products: @js($products)}" class="w-2/3">
+        <div x-data="{products: @js($products)}" class="w-1/2 md:w-2/3">
             <div class="bg-[#f8f8f8] h-screen overflow-y-auto h-[calc(100vh_-_80px)] overflow-x-hidden">
-                <div class="py-4 px-6 grid grid-cols-2 gap-x-4 gap-y-6 text-[#0f375b]">
+                <div class="py-4 px-6 grid md:grid-cols-2 gap-x-4 gap-y-6 text-[#0f375b]">
                     <button
                         @click="showNewProductModal = true"
                         :disabled="!isEditing"
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-1/3 flex flex-col">
+        <div class="w-1/2 md:w-1/3 flex flex-col">
             <div class="flex p-4 text-2xl items-center justify-between border-b">
                 <span class="mr-4">桌號</span>
                 <input
@@ -80,7 +80,7 @@
                                 <div class="px-3">
                                     <input type="text"
                                            disabled
-                                           class="w-32 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-center font-semibold text-xl"
+                                           class="w-14 lg:w-32 rounded bg-[#f8f8f8] border border-[#e5e5e5] text-center font-semibold text-xl"
                                            x-model="cart.quantity"
                                     >
                                 </div>
@@ -124,21 +124,21 @@
                     <button
                         @click="isEditing = true"
                         x-show="!isEditing"
-                        class="flex flex-1 justify-center items-center px-16 py-2 col-span-2 w-full rounded bg-[#0f375b] border border-[#0f375b]"
+                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 col-span-2 w-full rounded bg-[#0f375b] border border-[#0f375b]"
                     >
                         <span class="font-bold text-xl text-white">修改</span>
                     </button>
                     <button
                         @click="resetCarts"
                         x-show="isEditing"
-                        class="flex flex-1 justify-center items-center px-16 py-2 w-full rounded bg-white border border-[#0f375b]"
+                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 w-full rounded bg-white border border-[#0f375b]"
                     >
                         <span class="font-bold text-xl text-[#0f375b]">取消</span>
                     </button>
                     <button
                         wire:click="save"
                         x-show="isEditing"
-                        class="flex flex-1 justify-center items-center px-16 py-2 w-full rounded bg-[#0f375b] border border-[#0f375b]"
+                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 w-full rounded bg-[#0f375b] border border-[#0f375b]"
                     >
                         <span class="font-bold text-xl text-white">儲存</span>
                     </button>
