@@ -12,6 +12,7 @@ class ShowOrder extends Component
     public $order;
     public $carts;
     public $orderCarts;
+    public $status;
 
     public $note;
     public $newProductName;
@@ -24,6 +25,7 @@ class ShowOrder extends Component
         $this->orderCarts = $order->products->toArray();
         $this->carts = [];
         $this->note = $order->note;
+        $this->status = $order->status;
     }
 
     public function render()

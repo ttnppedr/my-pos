@@ -7,6 +7,7 @@
             showCheckoutModal: false,
             orderCarts: @js($orderCarts),
             carts: @entangle('carts').defer,
+            status: @entangle('status'),
 
             resetCarts() {
                 this.carts = JSON.parse(JSON.stringify(this.orderCarts));
@@ -124,7 +125,9 @@
                     <button
                         @click="isEditing = true"
                         x-show="!isEditing"
-                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 col-span-2 w-full rounded bg-[#0f375b] border border-[#0f375b]"
+                        :disabled="status === 2"
+                        :class="status === 2 ? 'bg-[#e5e5e5]' : 'bg-white border border-[#0f375b]'"
+                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 col-span-2 w-full rounded bg-[#0f375b]"
                     >
                         <span class="font-bold text-xl text-white">修改</span>
                     </button>
@@ -142,10 +145,22 @@
                     >
                         <span class="font-bold text-xl text-white">儲存</span>
                     </button>
-                    <x-disablable-button type="danger" @click="showDeleteOrderModal = true">刪 除
-                    </x-disablable-button>
-                    <x-disablable-button type="normal" @click="showCheckoutModal = true">結 帳
-                    </x-disablable-button>
+                    <button
+                        @click="showDeleteOrderModal"
+                        :disabled="status === 2"
+                        :class="status === 2 ? 'bg-[#e5e5e5]' : 'bg-[#a71f23] border border-[#a71f23]'"
+                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 w-full rounded"
+                    >
+                        <span class="font-bold text-xl text-white">刪除</span>
+                    </button>
+                    <button
+                        @click="showCheckoutModal"
+                        :disabled="status === 2"
+                        :class="status === 2 ? 'bg-[#e5e5e5]' : 'bg-[#006941] border border-[#006941]'"
+                        class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 w-full rounded"
+                    >
+                        <span class="font-bold text-xl text-white">刪除</span>
+                    </button>
                 </div>
             </div>
         </div>
