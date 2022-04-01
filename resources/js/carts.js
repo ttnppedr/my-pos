@@ -1,7 +1,7 @@
 export default () => ({
     showNewProductModal: false,
     newProductName: null,
-    newProductPrice: null,
+    newProductPrice: 300,
     test: true,
     carts: [],
 
