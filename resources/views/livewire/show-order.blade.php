@@ -146,7 +146,7 @@
                         <span class="font-bold text-xl text-white">儲存</span>
                     </button>
                     <button
-                        @click="showDeleteOrderModal"
+                        @click="showDeleteOrderModal = true"
                         :disabled="status === 2"
                         :class="status === 2 ? 'bg-[#e5e5e5]' : 'bg-[#a71f23] border border-[#a71f23]'"
                         class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 w-full rounded"
@@ -154,7 +154,7 @@
                         <span class="font-bold text-xl text-white">刪除</span>
                     </button>
                     <button
-                        @click="showCheckoutModal"
+                        @click="showCheckoutModal = true"
                         :disabled="status === 2"
                         :class="status === 2 ? 'bg-[#e5e5e5]' : 'bg-[#006941] border border-[#006941]'"
                         class="flex flex-1 justify-center items-center px-8 xl:px-16 py-2 w-full rounded"
