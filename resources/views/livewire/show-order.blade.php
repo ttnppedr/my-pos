@@ -32,7 +32,7 @@
                     </button>
                     <template x-for="product in products">
                         <button
-                            @click="addFromProductList(product)"
+                            @click="openProductModal(product)"
                             :disabled="!isEditing"
                             :class="isEditing ? 'bg-white cursor-pointer' : 'bg-[#e5e5e5]'"
                             class="px-4 py-5 border border-[#e5e5e5] rounded font-bold"
@@ -58,7 +58,7 @@
                 >
             </div>
             <div class="overflow-y-auto h-[calc(100vh_-_370px)] overflow-x-hidden">
-                <template x-for="cart in carts" :key="`${cart.name}-${cart.price}`">
+                <template x-for="cart in carts" :key="`${cart.name}-${cart.price}-${cart.note}`">
                     <div class="mx-4 mt-3 px-3 py-4 border border-[#e5e5e5] rounded">
                         <div class="flex justify-between text-[#0f375b] text-xl pb-2">
                             <span x-text="cart.name"></span>
@@ -113,6 +113,9 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="flex text-xl pt-2">
+                            <span class="text-[#f5a623]" x-text="cart.note"></span>
+                        </div>
                     </div>
                 </template>
             </div>
@@ -165,6 +168,7 @@
             </div>
         </div>
         <x-new-product-modal></x-new-product-modal>
+        <x-product-modal></x-product-modal>
         <x-delete-order-modal></x-delete-order-modal>
         <x-checkout-modal></x-checkout-modal>
     </div>

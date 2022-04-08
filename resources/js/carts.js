@@ -1,8 +1,15 @@
 export default () => ({
     showNewProductModal: false,
     newProductName: null,
-    newProductPrice: 300,
-    test: true,
+    newProductPrice: null,
+    newProductNote: null,
+
+    showProductModal: false,
+    productId: null,
+    productName: null,
+    productPrice: null,
+    productNote: null,
+
     carts: [],
 
     get totalPrice() {
@@ -15,12 +22,16 @@ export default () => ({
         return this.newProductName && this.newProductPrice;
     },
 
+    get canAddToCart() {
+        return this.productName && this.productPrice;
+    },
+
     get isCartEmpty() {
         return this.carts.length === 0;
     },
 
     addNewToCart() {
-        let item = this.carts.find(cart => cart.name === this.newProductName && cart.price === +this.newProductPrice);
+        let item = this.carts.find(cart => cart.name === this.newProductName && cart.price === +this.newProductPrice && cart.note === this.newProductNote);
         if (item) {
             item.quantity++;
             this.closeNewProductModal();
@@ -31,26 +42,30 @@ export default () => ({
             id: null,
             name: this.newProductName,
             price: this.newProductPrice,
+            note: this.newProductNote,
             quantity: 1
         });
 
         this.closeNewProductModal();
     },
 
-    addFromProductList(product) {
-        let item = this.carts.find(cart => cart.name === product.name && cart.price === product.price);
+    addFromProductList() {
+        let item = this.carts.find(cart => cart.name === this.productName && cart.price === this.productPrice && cart.note === this.productNote);
         if (item) {
-            this.closeNewProductModal();
+            this.closeProductModal();
             item.quantity++;
             return;
         }
 
         this.carts.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
+            id: this.productId,
+            name: this.productName,
+            price: this.productPrice,
+            note: this.productNote,
             quantity: 1
         });
+
+        this.closeProductModal();
     },
 
     cartPlus(cart) {
@@ -67,10 +82,26 @@ export default () => ({
         this.carts = this.carts.filter(candidate => candidate !== cart);
     },
 
+    openProductModal(product) {
+        this.productId = product.id;
+        this.productName = product.name;
+        this.productPrice = product.price;
+        this.productNote = null;
+        this.showProductModal = true;
+    },
+
+    closeProductModal() {
+        this.showProductModal = false;
+        this.productName = null;
+        this.productPrice = null;
+        this.productNote = null;
+    },
+
     closeNewProductModal() {
         this.showNewProductModal = false;
         this.newProductName = null;
         this.newProductPrice = null;
+        this.newProductNote = null;
     },
 
     clearCart() {

@@ -14,7 +14,7 @@
                     </div>
                     <template x-for="product in products">
                         <div
-                            @click="addFromProductList(product)"
+                            @click="openProductModal(product)"
                             class="bg-white px-4 py-5 border border-[#e5e5e5] rounded cursor-pointer"
                         >
                             <div class="flex justify-between text-2xl">
@@ -35,8 +35,8 @@
                 >
             </div>
             <div class="overflow-y-auto h-[calc(100vh_-_370px)] overflow-x-hidden">
-                <template x-for="cart in carts" :key="`${cart.name}-${cart.price}`">
-                    <div class="mx-4 mt-3 px-3 py-4 border border-[#e5e5e5] rounded cursor-pointer">
+                <template x-for="cart in carts" :key="`${cart.name}-${cart.price}-${cart.note}`">
+                    <div class="mx-4 mt-3 px-3 py-4 border border-[#e5e5e5] rounded">
                         <div class="flex justify-between text-[#0f375b] text-md md:text-xl pb-2">
                             <span x-text="cart.name"></span>
                             <span x-text="'*'+cart.quantity+' / $'+new Intl.NumberFormat().format(cart.price)"></span>
@@ -85,6 +85,9 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="flex text-xl pt-2">
+                            <span class="text-[#f5a623]" x-text="cart.note"></span>
+                        </div>
                     </div>
                 </template>
             </div>
@@ -122,5 +125,6 @@
             </div>
         </div>
         <x-new-product-modal></x-new-product-modal>
+        <x-product-modal></x-product-modal>
     </div>
 </div>

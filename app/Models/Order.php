@@ -28,4 +28,9 @@ class Order extends Model
             return $arr;
         }, []));
     }
+
+    public function getLinkAttribute()
+    {
+        return route('show-order', $this->id);
+    }
 }
