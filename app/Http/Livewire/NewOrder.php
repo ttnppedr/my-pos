@@ -46,6 +46,7 @@ class NewOrder extends Component
     {
         return DB::transaction(function () use ($products) {
             $order = auth()->user()->orders()->create([
+                'team_id' => auth()->user()->team_id,
                 'status' => Order::STATUS['holding'],
                 'amount_received' => 0,
                 'amount_receivable' => $this->calculateAmountReceivable(),

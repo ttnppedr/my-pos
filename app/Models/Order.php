@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\TeamScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +15,12 @@ class Order extends Model
         'completed' => 2,
     ];
 
-    protected $fillable = ['user_id', 'status', 'amount_receivable', 'amount_received', 'note'];
+    protected $fillable = ['user_id', 'team_id', 'status', 'amount_receivable', 'amount_received', 'note'];
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new TeamScope);
+    }
 
     public function products()
     {
