@@ -48,7 +48,15 @@ class ShowOrder extends Component
 
     public function deleteOrder()
     {
-        $this->order->delete();
+        DB::transaction(function () {
+            foreach ($this->order->products as $orderProduct) {
+                if ($orderProduct->product_id) {
+                    Product::whereId($orderProduct->product_id)->increment('quantity', $orderProduct->quantity);
+                }
+            }
+
+            $this->order->delete();
+        });
 
         return redirect()->route('orders');
     }
@@ -71,12 +79,26 @@ class ShowOrder extends Component
             $this->order->update([
                 'amount_receivable' => $this->calculateAmountReceivable(),
             ]);
-            foreach ($this->order->products as $product) {
-                $product->delete();
+
+            foreach ($this->order->products as $orderProduct) {
+                if ($orderProduct->product_id) {
+                    Product::whereId($orderProduct->product_id)->increment('quantity', $orderProduct->quantity);
+                }
+                $orderProduct->delete();
             }
+
+            $productInfo = Product::whereIn('id', collect($products)->pluck('id'))->get(['id', 'type', 'cost']);
+
             foreach ($products as $product) {
-                $this->order->products()->create($product);
+                $info = $productInfo->firstWhere('id', $product['product_id']);
+
+                $this->order->products()->create($product + ($info ? [
+                        'type' => $info->type, 'cost' => $info->cost
+                    ] : []));
+
+                Product::whereId($product['product_id'])->decrement('quantity', $product['quantity']);
             }
+
             $this->order->update(['note' => $this->note]);
         });
     }
