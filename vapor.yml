@@ -2,6 +2,7 @@ id: 29273
 name: my-pos
 environments:
     production:
+        database: my-pos
         domain: my-pos.tw
         storage: my-pos-prod-storage
         queues: false
@@ -12,11 +13,6 @@ environments:
         timeout: 30
         runtime: docker
         gateway-version: 2
-        subnets:
-            - subnet-09513ea68897a719f
-            - subnet-0e706d8750b55af41
-        security-groups:
-            - sg-06434f456e5667d3f
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
