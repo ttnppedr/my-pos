@@ -13,6 +13,11 @@ environments:
         timeout: 30
         runtime: docker
         gateway-version: 2
+        subnets:
+            - subnet-0cd3f8767430361f3
+            - subnet-06a7d791137e2e300
+        security-groups:
+            - sg-06434f456e5667d3f
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
